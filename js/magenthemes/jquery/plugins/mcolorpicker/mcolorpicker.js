@@ -100,9 +100,11 @@
 
   $.fn.mColorPicker.events = function() {
 
+
     $("#mColorPickerBg").on('click', $.fn.mColorPicker.closePicker);
 
     $('.mColorPicker').on('keyup', function () {
+
 
       try {
   
@@ -113,6 +115,7 @@
         }).trigger('change');
       } catch (r) {}
     });
+
 
     $('.mColorPickerTrigger').on('click', $.fn.mColorPicker.colorShow);
   
@@ -132,9 +135,11 @@
       else if (!$t.hasClass('mPastColor')) $o.color = $.fn.mColorPicker.whichColor(e.pageX - offset.left, e.pageY - offset.top, hex);
 
       $o.currentInput.mSetInputColor($o.color);
+
     }).on('click', $.fn.mColorPicker.colorPicked);
   
     $('#mColorPickerInput').on('keyup', function (e) {
+
   
       try {
   
@@ -145,12 +150,12 @@
       } catch (r) {}
 
     }).on('blur', function () {
-  
+
       $o.currentInput.mSetInputColor($o.color);
     });
   
     $('#mColorPickerWrapper').on('mouseleave', function () {
-  
+
       if (!$o.changeColor) return false;
 
       var $e = $o.currentInput; 

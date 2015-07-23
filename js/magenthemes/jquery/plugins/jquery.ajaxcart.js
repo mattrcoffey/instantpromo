@@ -27,19 +27,25 @@ $mt(function($) {
     $(window).resize(function(){
         themeResize();
     });
+
 	$('a').on('click', function(){
+
         var checkUrl = ($(this).attr('href').indexOf('checkout/cart/delete') > -1);
         if(checkUrl && $(this).attr('class') !='deletecart' && $(this).attr('class').indexOf('btn-remove2') == -1){
             deletecart($(this).attr('href'));
             return false;
         }
     });
+
     $('.success button.close').on('click', function() {
+
         $(this).parent().fadeOut('slow', function() {
             $(this).remove();
         });
     });
+
     $('.options-cart').on('click', function() {
+
         $.colorbox({
             iframe: true,
             href:this.href,
@@ -60,7 +66,9 @@ $mt(function($) {
         });
     });
 
+
     $('.show-options').on('click', function(e){
+
         if($('.btn-cart-mobile').length == 0){
             $('#options-cart-' + $(this).attr('data-id')).trigger('click');
         }else{
