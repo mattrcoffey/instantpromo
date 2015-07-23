@@ -1,0 +1,390 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<?php
+$theme = $this->helper('mtbelano');
+$compareHeader = $theme->getCfg('header/compare');
+$mobileCart = $theme->getCfg('header/hide_on_mobile');
+$layout = $theme->getCfg('header/layout');
+$stickyEnable = $theme->getCfg('header/sticky_enable');
+$toplink = $theme->getCfg('magento_blocks/top_links');
+if($mobileCart){$class = 'hidden-xs';}
+$logo = Mage::getStoreConfig('mtbelano_design/header/logo_upload');
+$logo_retina = Mage::getStoreConfig('mtbelano_design/header/logo_retina_upload');
+$mediaUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+?>
+<?php 
+	$header_class = "";
+	if($layout == "layout1"){
+		$header_class = "header-layout-1";
+	}
+	elseif($layout == "layout2"){
+		$header_class = "header-layout-2";
+	}
+	elseif($layout == "layout4"){
+		$header_class = "header-layout-4";
+	}
+	else{
+		$header_class = "header-layout-3 header-layout-default";
+	}
+ ?>
+<header class="header-container <?php echo $header_class; ?>">
+        <div class="header">
+		    <div class="header-top">
+			    <div class="container">
+				     <div class="row">
+                         <!-- Header Top Layout 1 -->
+                         <?php if($layout == "layout1"): ?>
+						 <div class="header-top-left col-lg-4 col-md-4 col-sm-4 col-xs-12 v-grid"> 
+						    <div class="header-talet">
+								<?php echo $this->getChildHtml('store_language') ?>
+								<div class="currency_top"><?php echo $this->getChildHtml('currency') ?></div>
+								<!--<p class="welcome-msg"><?php //echo $this->getWelcome() ?> <?php //echo $this->getAdditionalHtml() ?></p>-->
+							 </div>	
+						 </div>	
+						 <div class="header-top-right col-lg-8 col-md-8 col-sm-12 col-xs-12 v-grid">
+						    <div class="top-link">
+								<?php if($toplink):?>
+									 <?php echo $this->getChildHtml('topLinks') ?>
+								<?php endif;?> 
+							</div>
+						 </div>						 
+						 
+                         <?php endif; ?>
+                         <!-- ///Header Top Layout 1 -->
+
+                         <!-- Header Top Layout 2 -->
+                         <?php if($layout == "layout2"): ?>
+                         <div class="header-top-left col-lg-4 col-md-4 col-sm-4 col-xs-12 v-grid">
+                             <div class="header-talet">
+                                 <?php echo $this->getChildHtml('store_language') ?>
+                                 <div class="currency_top"><?php echo $this->getChildHtml('currency') ?></div>
+                                 <!--<p class="welcome-msg"><?php //echo $this->getWelcome() ?> <?php //echo $this->getAdditionalHtml() ?></p>-->
+                             </div>
+                         </div>
+                         <div class="header-top-right col-lg-8 col-md-8 col-sm-12 col-xs-12 v-grid">
+                             <div class="top-link">
+                                 <?php if($toplink):?>
+                                 <?php echo $this->getChildHtml('topLinks') ?>
+                                 <?php endif;?>
+                             </div>
+                         </div>
+                         <?php endif; ?>
+                         <!-- ///Header Top Layout 2 -->
+
+                         <!-- Header Top Layout 3 -->
+                         <?php if($layout == "layout3"): ?>
+                         <div class="header-top-left col-lg-4 col-md-4 col-sm-4 col-xs-12 v-grid">
+                             <div class="header-talet">
+                                 <?php echo $this->getChildHtml('store_language') ?>
+                                 <div class="currency_top"><?php echo $this->getChildHtml('currency') ?></div>
+                                 <!--<p class="welcome-msg"><?php //echo $this->getWelcome() ?> <?php //echo $this->getAdditionalHtml() ?></p>-->
+                             </div>
+                         </div>
+                         <div class="header-top-right col-lg-8 col-md-8 col-sm-12 col-xs-12 v-grid">
+                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                 <?php if($toplink):?>
+                                 <?php echo $this->getChildHtml('topLinks') ?>
+                                 <?php endif;?>
+                             </div>
+                             <div class="mt_getcart col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                 <div class="mt-top-cart <?php echo $class;?>">
+                                     <div class="mt-maincart">
+                                         <?php echo $this->getChildHtml('ajaxcart'); ?>
+                                     </div>
+									 <div id="notification"></div>
+                                 </div>
+                             </div>
+                         </div>
+                         <?php endif; ?>
+                         <!-- ///Header Top Layout 3 -->
+
+                         <!-- Header Top Layout 4 -->
+                         <?php if($layout == "layout4"): ?>
+                         <div class="header-top-left col-lg-4 col-md-4 col-sm-4 col-xs-12 v-grid">
+                             <div class="header-talet">
+                                 <?php echo $this->getChildHtml('store_language') ?>
+                                 <div class="currency_top"><?php echo $this->getChildHtml('currency') ?></div>
+                                 <!--<p class="welcome-msg"><?php //echo $this->getWelcome() ?> <?php //echo $this->getAdditionalHtml() ?></p>-->
+                             </div>
+                         </div>
+                         <div class="header-top-right col-lg-8 col-md-8 col-sm-12 col-xs-12 v-grid">
+                             <div class="top-link">
+                                 <?php if($toplink):?>
+                                 <?php echo $this->getChildHtml('topLinks') ?>
+                                 <?php endif;?>
+                             </div>
+                         </div>
+                         <?php endif; ?>
+                         <!-- ///Header Top Layout 4 -->
+
+					 </div>
+			    </div>	 
+			</div>
+			<div class="header-content" <?php if($layout == "layout3"): ?> id="mt-sticky-header"<?php endif; ?>>
+			    <div class="container">
+				    <div class="header-act row">
+					     <div class="navbar col-lg-12 visible-xs">
+							<div class="navbar navbar-inverse">
+								<div class="container-ner">
+									<div class="navbar-header">
+										<div class="navbar-toggle" type="button" data-toggle="collapse">
+											<div class="collapsed-icon">
+												<!--<span class="sr-only"><?php //echo $this->__('Navigation');?></span>-->
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						  </div>
+
+                        <!-- Header Content Layout 1 -->
+                        <?php if($layout == "layout1"): ?>
+						<div class="header-content-left col-lg-4 col-md-4 col-sm-4 col-xs-12 v-grid">
+						   <div class="logo">
+								<?php if ($this->getIsHomePage()):?>
+                                   <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>">
+                                       <strong><?php echo $this->getLogoAlt() ?></strong>
+                                        <img src="<?php echo $mediaUrl.'wysiwyg/magenthemes/mtbelano/logo/'.$logo; ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                                   </a>
+
+								<?php else:?>
+                                    <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong>
+                                        <img src="<?php echo $mediaUrl.'wysiwyg/magenthemes/mtbelano/logo/'.$logo; ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+                                    </a>
+								<?php endif?>
+							</div>
+						</div>
+						<div class="header-content-right col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						    <div class="header-right-inner clearfix">
+								<div class="hidden-xs top-seach col-lg-8 col-md-8 col-sm-8">
+									 <div class="quick-access">
+										 <?php echo $this->getChildHtml('topSearch') ?>
+									 </div>
+								</div>
+
+								<div class="mt_getcart col-lg-4 col-md-4 col-sm-4">
+                                    <?php if($compareHeader):?>
+                                        <div class="mt_getcompe hidden-sm hidden-xs pull-left">
+                                            <div class="top-compare">
+                                                <div class="mt-maincompare">
+                                                    <?php $_helper = $this->helper('catalog/product_compare'); ?>
+                                                    <span class="mt-icon-compareajax visible-md visible-lg"><i class="fa fa-files-o"></i><?php //echo $this->__('Compare') ?></span>
+                                                    <a href="<?php echo $_helper->getListUrl() ?>" target="_blank" class="visible-xs visible-sm clearfix">
+                                                        <span class="mt-icon-compareajax"></span>
+                                                        <span class="mt-compare-label"><?php echo $this->__('Compare') ?></span>
+                                                    </a>
+
+                                                    <div class="block-top-compare">
+                                                        <?php echo $this->getChildHtml('compareajax') ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                                                                
+                                    <?php endif;?>
+									 <div class="mt-top-cart">
+										<div class="mt-maincart">
+											<?php echo $this->getChildHtml('ajaxcart'); ?>
+										</div>
+										<div id="notification"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+							<div class="col-md-6 pull-right text-right hidden-xs header-contact"><p><span class="fa fa-phone"></span><?php echo Mage::getStoreConfig('general/store_information/phone'); ?></p><p><span class="fa fa-envelope"></span><a href="mailto:<?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?>"><?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?></a></p></div>
+						</div>
+						
+						
+						</div>
+                        <?php endif; ?>
+                        <!-- ///Header Content Layout 1 -->
+
+                        <!-- Header Content Layout 2 -->
+                        <?php if($layout == "layout2"): ?>
+                            <div class="header-2-left col-lg-5 col-md-5 col-sm-5">
+								 <?php echo $this->getChildHtml('header_block') ?>
+							</div>
+							<div class="header-2-right col-lg-7 col-md-7 col-sm-7">
+								<div class="header-content-left col-lg-4 col-md-4 col-sm-4 v-grid">
+								   <div class="logo">
+										<?php if ($this->getIsHomePage()):?>
+											<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+										<?php else:?>
+											<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+										<?php endif?>
+									</div>
+								</div>
+								<div class="header-content-right col-lg-5 col-md-5 col-sm-5">
+									<div class="hidden-xs top-seach">
+										 <div class="quick-access">
+											 <?php echo $this->getChildHtml('topSearch') ?>
+										  </div>
+									</div>
+								</div>
+								<div class="mt_getcart col-lg-3 col-md-3 col-sm-3">
+									 <div class="mt-top-cart">
+										<div class="mt-maincart">
+											<?php echo $this->getChildHtml('ajaxcart'); ?>
+										</div>
+										<div id="notification"></div>
+									</div>
+								</div>
+							</div>
+                        <?php endif; ?>
+                        <!-- ///Header Content Layout 2 -->
+
+                        <!-- Header Content Layout 3 -->
+                        <?php if($layout == "layout3"): ?>
+								<div class="header-content-left col-lg-2 col-md-3 col-sm-2 col-xs-12 v-grid">
+									<div class="logo">
+										<?php if ($this->getIsHomePage()):?>
+										<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+										<?php else:?>
+										<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="nav-top col-lg-10 col-md-10 col-sm-10 col-xs-12 v-grid">
+									<div class="clearer">
+										<?php echo $this->getChildHtml('topMenu') ?>
+									</div>
+								</div>
+								<div class="header-content-right header-content-seach">
+									<div class="hidden-xs">
+										<div class="quick-access">
+											<?php echo $this->getChildHtml('topSearch') ?>
+										</div>
+									</div>
+								</div>
+							
+						</div>
+                        <?php endif; ?>
+                        <!-- ///Header Content Layout 3 -->
+
+                        <!-- Header Content Layout 4 -->
+                        <?php if($layout == "layout4"): ?>
+					   
+							<div class="header-content-left col-lg-3 col-md-3 col-sm-3 v-grid">
+							   <div class="logo">
+									<?php if ($this->getIsHomePage()):?>
+										<h1><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+									<?php else:?>
+										<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+									<?php endif?>
+								</div>
+							</div>
+
+							<div class="header-2-right col-lg-9 col-md-9 col-sm-9">
+								<div class="header-2-left col-lg-5 col-md-5 col-sm-5">
+								 <?php echo $this->getChildHtml('header_block') ?>
+							    </div>
+								<div class="header-content-right col-lg-4 col-md-4 col-sm-4">
+									<div class="hidden-xs">
+										 <div class="quick-access">
+											 <?php echo $this->getChildHtml('topSearch') ?>
+										  </div>
+									</div>
+								</div>
+								<div class="mt_getcart col-lg-3 col-md-3 col-sm-3">
+									 <div class="mt-top-cart">
+										<div class="mt-maincart">
+											<?php echo $this->getChildHtml('ajaxcart'); ?>
+										</div>
+										<div id="notification"></div>
+									</div>
+								</div>
+							</div>
+                        <?php endif; ?>
+                        <!-- ///Header Content Layout 4 -->
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <!-- Menu Full Width layout 1 -->
+        <?php if($layout == "layout1"): ?>
+        <div class="menu-full" id="mt-sticky-header">
+            <div class="container header-cars">
+                <div class="nav-top v-grid">
+                    <div class="clearer">
+                        <?php echo $this->getChildHtml('topMenu') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <!-- ///Menu Full Width layout 2 -->
+
+        <?php if($layout == "layout2"): ?>
+        <div class="menu-full" id="mt-sticky-header">
+            <div class="container header-cars">
+                <div class="nav-top v-grid">
+                    <div class="clearer">
+                        <?php echo $this->getChildHtml('topMenu') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+		<!-- ///Menu Full Width layout 4 -->
+
+        <?php if($layout == "layout4"): ?>
+        <div class="menu-full" id="mt-sticky-header">
+            <div class="container header-cars">
+                <div class="nav-top v-grid">
+                    <div class="clearer">
+                        <?php echo $this->getChildHtml('topMenu') ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+		<?php if($stickyEnable){?>
+			<script type="text/javascript">
+				$mt(window).load(function(){
+					$mt("#mt-sticky-header").sticky({ topSpacing: 0 });
+                    var $logoImg = $mt('.mt-wrapper .header .logo img');
+                    if($logoImg.css('min-height') == '1px') {
+                        $logoImg.attr('src', $logoImg.attr('src').replace('<?php echo $logo;?>', '<?php echo $logo_retina;?>'));
+                    }
+				});
+			</script>
+        <?php }?>
+</header>
+<div style="position: fixed; right: 0; top: 49%; width: 49px; height: 155px;z-index: 999;" class="social-tabs-fixed">
+	<span class="social-tabs-fixed-fb" style="margin-bottom: 4px; display: inline-block;"><a target="_blank" href="https://www.facebook.com/InstantPromotionUSA"><img src="http://www.instantpromotion.co.uk/skin/frontend/mtbelano/default/images/ip-facebook.png"></a></span>
+	<span class="social-tabs-fixed-yt" style="margin-bottom: 4px; display: inline-block;"><a target="_blank" href="https://www.youtube.com/channel/UCL9LC3ud20YOVKF_FMBuE5A"><img src="http://www.instantpromotion.co.uk/skin/frontend/mtbelano/default/images/ip-youtube.png"></a></span>
+	<span class="social-tabs-fixed-fb" style="margin-bottom: 4px; display: inline-block;"><a target="_blank" href="https://twitter.com/InstantPromoUK"><img src="http://www.instantpromotion.co.uk/skin/frontend/mtbelano/default/images/ip-twitter.png"></a></span>
+</div>

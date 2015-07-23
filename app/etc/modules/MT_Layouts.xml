@@ -1,0 +1,8 @@
+<config>
+  <modules>
+    <MT_Layouts>
+      <active>true</active>
+      <codePool>local</codePool>
+    </MT_Layouts>
+  </modules>
+</config>

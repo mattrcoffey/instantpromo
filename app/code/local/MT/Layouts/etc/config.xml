@@ -1,0 +1,15 @@
+<config>
+  <global>
+    <page>
+      <layouts>
+        <MT_Layout translate="label">
+          <label>Non ECOM Layout</label>
+          <template>page/poa-layout.phtml</template>
+          <!--<reference name="product.info">
+			  <action method="setTemplate"><template>catalog/product/poa_view.phtml</template></action>
+			  </reference>-->
+        </MT_Layout>
+      </layouts>
+    </page>
+  </global>
+</config>

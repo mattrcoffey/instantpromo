@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <block type="core/text_list" name="packages" as="package_deals"></block>
+    </default>
+    <packages_index_index>
+        <reference name="content">
+            <block type="core/template" name="packages" template="instant/packages.phtml" />
+        </reference>
+    </packages_index_index>
+    <catalog_product_view>
+
+        
+    </catalog_product_view>
+</layout>

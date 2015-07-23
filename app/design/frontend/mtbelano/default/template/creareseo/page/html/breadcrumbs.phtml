@@ -1,0 +1,22 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+<div class="breadcrumbs col-md-7 col-sm-12 col-xs-12" xmlns:v="http://rdf.data-vocabulary.org/#">
+    <ul>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>" typeof="v:Breadcrumb">
+            <?php if($_crumbInfo['link']): ?>
+                <a rel="v:url" property="v:title" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></a>
+            <?php elseif($_crumbInfo['last']): ?>
+                <strong><?php echo $this->escapeHtml($_crumbInfo['label']) ?></strong>
+            <?php else: ?>
+                <?php echo $this->escapeHtml($_crumbInfo['label']) ?>
+            <?php endif; ?>
+            <?php if(!$_crumbInfo['last']): ?>
+                <span></span>
+            <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<div class="header-icons col-md-5 hidden-sm hidden-xs"><img class="img-responsive" style="margin-top: 14px; display: inline-block;" alt="Our proposition" src="<?php echo $this->getSkinUrl('images/ipusa-header-icons.png'); ?>" /></div>
+<?php endif; ?>

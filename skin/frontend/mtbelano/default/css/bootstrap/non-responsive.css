@@ -1,0 +1,74 @@
+/* Non-responsive overrides
+ *
+ * Utilitze the following CSS to disable the responsive-ness of the container,
+ * grid system, and navbar.
+ */
+
+/* Reset the container */
+.container {
+  max-width: none !important;
+  width: 970px;
+}
+.header-container .header .header-top .header-top-left p.welcome-msg{
+     padding: 0 0 0 10px;
+}
+.header .form-language .sbHolder,
+.header .currency_top .sbHolder{
+     padding: 0 25px 0 10px;
+}
+.mt_container .mt_block_left {
+    float: left;
+    width: 635px;
+}
+.mt_container .mt_block_image1 {
+    height: 392px;
+    width: 310px;
+}
+.mt_container .mt_block_image2,
+.mt_container .mt_block_image3{
+     height: 190px;
+    width: 310px;
+}
+.mt_container .mt_block_image4,
+.mt_container .mt_block_image6 {
+    height: 190px;
+    width: 310px;
+}
+.mt_container .mt_block_image5{
+   width: 324px;
+	 height: 192px;
+}
+.mt_container .mt_block_right{
+    width: 290px;
+}
+.mt_container .mt_block_image7{
+     width: 315px;
+	  height: 395px;
+}
+.widget-static-block .custom .title h2{
+     font-size: 190%;
+}
+.block-subscribe .block-title strong span,
+.footer-container .footer-bottom .section-space .collapsible h3,
+.block .block-title strong span{
+      font-size: 15px;
+}
+.block-subscribe .block-content .input-box input.input-text{
+      width: 260px;
+}
+.mt-block-free {
+    font-size: 20px;
+}
+.footer address{
+      font-size: 90%;
+}
+.block-wishlist .block-content li.item .product-details .btn-remove {
+    width: 100% !important;
+}
+.product-view .product-img-box .more-views {
+    width: 233px !important;
+}
+.col2-left-layout .rev_slider_wrapper,.col2-left-layout .rev_slider{
+     width: 940px !important;
+	 height: 500px !important;
+}

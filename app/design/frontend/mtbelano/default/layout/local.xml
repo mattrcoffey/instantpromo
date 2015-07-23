@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- add aoe profiler DB profiling-->
+<layout>
+	<default>
+	    <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+		<reference name="head">
+
+		<!-- JS -->
+
+			<!-- jQuery -->
+			<!-- <action method="addJs"><script>magenthemes/jquery/jquery-1.8.2.min.js</script></action> -->
+            <action method="addJs"><script>magenthemes/jquery/jquery-1.9.1.min.js</script></action>
+            <!-- Check if ie -->
+            <action method="addItem"><type>js</type><name>magenthemes/jquery/plugins/bootstrap/html5shiv.js</name><params/><if>lt IE 9</if></action>
+            <action method="addItem"><type>js</type><name>magenthemes/jquery/plugins/bootstrap/respond.min.js</name><params/><if>lt IE 9</if></action>
+
+			<!-- jQuery plugins -->
+            <action method="addJs"><script>magenthemes/jquery/plugins/bootstrap/bootstrap.min-ck.js</script></action>
+            <action method="addJs"><script>magenthemes/jquery/plugins/bootstrap/bootstrap-tooltip.js</script></action>
+            <action method="addJs"><script>magenthemes/jquery/plugins/bootstrap/collapse.js</script></action>
+            <action method="addJs"><script>magenthemes/jquery/plugins/jquery.lib.min-ck.js</script></action>
+            <action method="addJs" ifconfig="ajaxcart/ajaxcart_config/enable_ajaxcart"><script>magenthemes/jquery/plugins/jquery.ajaxcart.min.js</script></action>
+            <action method="addJs" ifconfig="mtnewsletter/display_options/enable"><script>magenthemes/jquery/plugins/jquery.cookie.js</script></action>
+            <action method="addJs"><script>magenthemes/jquery/ip-scripts.js</script></action>
+
+
+		<!-- CSS: -->
+
+			<!-- Components -->
+            <!--<action method="addItem"><type>skin_css</type><name>css/bootstrap/bootstrap.min.css</name><params/></action>-->
+            <!-- Bootstrap RTL -->
+            <action method="addItem" ifconfig="mtbelano_layout/responsive/rtl_language"><type>skin_css</type><name>css/bootstrap/bootstrap-rtl.min.css</name><params/></action>
+			<action method="addItem" ifconfig=""><type>skin_css</type><name>css/fontawesome/css/font-awesome.min.css</name><params/></action>
+            <!-- Non Responsive -->
+            <action method="addCss" ifconfig="mtbelano_layout/responsive/responsive" condition="0"><stylesheet>css/bootstrap/non-responsive.css</stylesheet></action>
+
+            <!--<action method="addItem"><type>skin_css</type><name>css/megamenu.css</name><params/></action>-->
+            <action method="addItem"><type>skin_css</type><name>css/accordion.css</name><params/></action>
+            <!-- CSS base and Magento overrides -->
+            <action method="addItem"><type>skin_css</type><name>css/styles.less</name><params/></action>
+			<action method="addItem"><type>skin_css</type><name>css/responsive.css</name><params/></action>
+			<!-- <action method="addItem"><type>skin_css</type><name>css/design_default.less</name><params/></action> -->
+			<action method="addItem"><type>skin_css</type><name>css/rtl.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/magenthemes/cloudzoom/css/colorbox.css</name></action>
+           <!-- Stop generated CSS <action method="addCss"><stylesheet helper="mtbelano/cssgen/getDesignFile" /></action>
+            <action method="addCss"><stylesheet helper="mtbelano/cssgen/getLayoutFile" /></action>-->
+            <!-- Custom css -->
+            <action method="addCss" ifconfig="mtbelano/customization/custom_css"><stylesheet>css/custom.css</stylesheet></action>
+			
+		</reference>
+
+        <!-- Mainmenu ====================================================================== -->
+        <reference name="top.menu">
+            <action method="unsetChild"><name>catalog.topnav</name></action>
+            <block type="mtbelano/mainmenu_menu" name="catalog.topnav.menu" template="magenthemes/mainmenu/top.phtml"/>
+        </reference>
+
+        <!-- Footer scripts ====================================================================== -->
+        <reference name="before_body_end">
+            <block type="core/template" name="footer.theme.scripts" template="page/html/footer_theme_scripts.phtml" before="-" />
+        </reference>
+
+        <!-- Root containers ====================================================================== -->
+        <reference name="root">
+        	<!-- Sidebar Menu ====================================================================== -->
+            <block type="mtbelano/mainmenu_menu" name="mtsidebar" template="magenthemes/mainmenu/sidebar.phtml"/>
+            <block type="core/text_list" name="preface" as="preface" translate="label">
+                <label>Page Preface</label>
+            </block>
+			<block type="core/text_list" name="main_slide_right" as="main_slide_right" translate="label">
+                <label>Main Slide Right</label>
+            </block>
+			
+            <block type="core/text_list" name="postscript" as="postscript" translate="label">
+                <label>Page Postscript</label>
+            </block>
+			<block type="core/text_list" name="parallax" as="parallax" translate="label">
+                <label>Page Parallax</label>
+            </block>
+			<block type="core/text_list" name="parallax-image" as="parallax_image" translate="label">
+                <label>Page Parallax image</label>
+            </block>
+            <block type="core/text_list" name="main_top" as="main_top" translate="label">
+                <label>Main Top</label>
+            </block>
+            <block type="core/text_list" name="main_bottom" as="main_bottom" translate="label">
+                <label>Main Bottom</label>
+            </block>
+            <block type="core/text_list" name="left_top" as="left_top" translate="label">
+                <label>Left Column Top</label>
+            </block>
+            <block type="core/text_list" name="left_bottom" as="left_bottom" translate="label">
+                <label>Left Column Bottom</label>
+            </block>
+            <block type="core/text_list" name="right_top" as="right_top" translate="label">
+                <label>Right Column Top</label>
+            </block>
+			<block type="core/text_list" name="right_bottom" as="right_bottom" translate="label">
+                <label>Right Column Bottom</label>
+            </block>
+         
+            
+            
+			
+        
+        </reference>
+
+        <!-- Right ====================================================================== -->
+        <reference name="right">
+            <!-- <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.reports.product.compared</name></action>
+            <action method="unsetChild"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild"><name>wishlist</name></action>
+            <action method="unsetChild"><name>sale.reorder.sidebar</name></action>
+            <action method="unsetChild"><name>right.poll</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action> -->
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="paypal.partner.right.logo"/>
+			<action method="unsetChild"><name>right.permanent.callout</name></action>
+			<action method="unsetChild"><name>sale.reorder.sidebar</name></action>
+			<action method="unsetChild"><name>cart_sidebar</name></action>
+			<action method="unsetChild"><name>wishlist_sidebar</name></action>
+			<action method="unsetChild"><name>right.poll</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+			
+		   <block type="catalog/product_compare_sidebar" name="catalog.compare.sidebar.right" before="cart_sidebar" template="catalog/product/compare/sidebar.phtml"/>
+           <block type="tag/popular" name="tags_popular" template="tag/popular.phtml"/>
+		   <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+			<action method="unsetChild"><name>right.reports.product.compared</name></action>
+			<action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+			 <action method="unsetChild"><name>right.reports.product.viewed</name></action>
+			
+        </reference>
+
+        <!-- Left ====================================================================== -->
+        <reference name="left">
+            <remove name="left.newsletter"/> <!-- Moved newsletter to the footer -->
+			<action method="unsetChild"><name>left.permanent.callout</name></action>
+			<action method="unsetChild"><name>left.reports.product.viewed</name></action>
+
+           <!--  <block type="catalog/product_compare_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
+            <block type="reports/product_compared" name="right.reports.product.compared" template="reports/product_compared.phtml" />
+            <block type="reports/product_viewed" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
+            <block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" template="wishlist/sidebar.phtml"/>
+            <block type="poll/activePoll" name="right.poll">
+                <action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
+                <action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
+            </block>
+            <block type="tag/popular" name="tags_popular" template="tag/popular.phtml"/>
+            <block type="paypal/logo" name="paypal.partner.right.logo" template="paypal/partner/logo.phtml"/> -->
+			
+            <action method="unsetChild"><name>tags_popular</name></action>
+			<action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+            <action method="unsetChild"><name>right.reports.product.compared</name></action>
+            <action method="unsetChild"><name>right.reports.product.viewed</name></action>
+            <action method="unsetChild"><name>wishlist</name></action>
+            <action method="unsetChild"><name>sale.reorder.sidebar</name></action>
+            <action method="unsetChild"><name>right.poll</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+
+        <!-- Header ====================================================================== -->
+        <reference name="header">
+            <block type="catalog/product_compare_sidebar" name="compareajax" template="catalog/product/compare/header.phtml"></block>
+			<block type="page/switch" name="store_language" as="store_language" template="page/switch/flags.phtml"/>
+			<block type="directory/currency" name="currency" as="currency" template="directory/currency-top.phtml"/>
+			<block type="cms/block" name="header_block" as="header_block">
+                <action method="setBlockId"><block_id>header_block</block_id></action>
+            </block>
+        </reference>
+		<reference name="top.links">
+			<action method="removeLinkByUrl">
+				  <url helper="checkout/url/getCartUrl" />
+			</action> 
+		<!-- Add custom links. Pretty self-explanatory.
+                Dig into app/code/core/Mage/Page/Block/Template/Links.php for more info -->
+                <action method="addLink" translate="label title">
+                    <label>About Us</label>
+                    <url>about-instant-promotion</url>  <!-- can use full url also -->
+                    <title>About Us</title>
+                    <prepare>true</prepare> <!-- set true if adding base url param -->
+                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
+                    <!-- there are a few param you can send to do different things in <urlParams> 
+                             dig into app/code/core/Mage/Core/Model/Url.php, around line 803 -->                   
+ 
+                    <!-- below adds #add-fragment to the end of your url -->
+                    <!-- <urlParams><_fragment>add-fragment</_fragment></urlParams> -->
+ 
+                    <!-- below adds ?add-query to the end of your url -->
+                    <!-- <urlParams><_query>add-fragment</_query></urlParams> -->
+ 
+                    <!-- below gives you a new session id (i think...)-->
+                    <!-- <urlParams><_nosid>true</_nosid></urlParams> -->
+ 
+                    <!-- below replaces double quotes, single quotes, greater than, and less than signs 
+                             to their respective url escaped replacements (%22, %27, %3E, %3C) -->
+                    <!-- <urlParams><_escape>i'm-a-blog-url</_escape></urlParams> -->
+ 
+                    <position>98</position>
+                    <liParams/>
+                    <aParams>class="top-link-about-us"</aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>	
+                
+                <action method="addLink" translate="label title">
+                    <label>Latest News</label>
+                    <url>news</url>  <!-- can use full url also -->
+                    <title>About Us</title>
+                    <prepare>true</prepare> <!-- set true if adding base url param -->
+                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
+                    <!-- there are a few param you can send to do different things in <urlParams> 
+                             dig into app/code/core/Mage/Core/Model/Url.php, around line 803 -->                   
+ 
+                    <!-- below adds #add-fragment to the end of your url -->
+                    <!-- <urlParams><_fragment>add-fragment</_fragment></urlParams> -->
+ 
+                    <!-- below adds ?add-query to the end of your url -->
+                    <!-- <urlParams><_query>add-fragment</_query></urlParams> -->
+ 
+                    <!-- below gives you a new session id (i think...)-->
+                    <!-- <urlParams><_nosid>true</_nosid></urlParams> -->
+ 
+                    <!-- below replaces double quotes, single quotes, greater than, and less than signs 
+                             to their respective url escaped replacements (%22, %27, %3E, %3C) -->
+                    <!-- <urlParams><_escape>i'm-a-blog-url</_escape></urlParams> -->
+ 
+                    <position>99</position>
+                    <liParams/>
+                    <aParams>class="top-link-about-us"</aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>	
+
+                
+                 <action method="addLink" translate="label title">
+                    <label>Contact Us</label>
+                    <url>contacts</url>  <!-- can use full url also -->
+                    <title>Contact Us</title>
+                    <prepare>true</prepare> <!-- set true if adding base url param -->
+                    <urlParams helper="core/url/getHomeUrl"/> <!-- base url - thanks @Russ! -->
+                    <!-- there are a few param you can send to do different things in <urlParams> 
+                             dig into app/code/core/Mage/Core/Model/Url.php, around line 803 -->                   
+ 
+                    <!-- below adds #add-fragment to the end of your url -->
+                    <!-- <urlParams><_fragment>add-fragment</_fragment></urlParams> -->
+ 
+                    <!-- below adds ?add-query to the end of your url -->
+                    <!-- <urlParams><_query>add-fragment</_query></urlParams> -->
+ 
+                    <!-- below gives you a new session id (i think...)-->
+                    <!-- <urlParams><_nosid>true</_nosid></urlParams> -->
+ 
+                    <!-- below replaces double quotes, single quotes, greater than, and less than signs 
+                             to their respective url escaped replacements (%22, %27, %3E, %3C) -->
+                    <!-- <urlParams><_escape>i'm-a-blog-url</_escape></urlParams> -->
+ 
+                    <position>99</position>
+                    <liParams/>
+                    <aParams>class="top-link-contacts"</aParams>
+                    <beforeText></beforeText>
+                    <afterText></afterText>
+                </action>	
+                
+        </reference> 
+
+        <!-- Add blocks to the footer ====================================================================== -->
+        <reference name="footer">
+		    <block type="core/text_list" name="footer_brands" as="footer_brands" translate="label">
+                <label>Footer Brands</label>
+            </block>
+            <block type="core/text_list" name="footer_top" as="footer_top" translate="label">
+                <label>Footer Top</label>
+            </block>
+            <block type="core/text_list" name="footer_bottom" as="footer_bottom" translate="label">
+                <label>Footer Bottom</label>
+            </block>
+			<block type="cms/block" name="footer_paypal" as="footer_paypal">
+                <action method="setBlockId"><block_id>footer_paypal</block_id></action>
+            </block>
+        </reference>
+    </default>
+
+    <!-- 3 COLUMN PAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <page_three_columns>
+
+        <reference name="right">
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+
+        <reference name="left">
+            <action method="unsetChild"><name>wishlist</name></action>
+        </reference>
+
+    </page_three_columns>
+
+    <!-- USER LOGGED IN/OUT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <customer_logged_out>
+
+        <!-- <reference name="top.links">
+            <action method="addLink" translate="label title"><label>Sign Up</label><url>customer/account/create</url><title>Sign Up</title><prepare>true</prepare><urlParams/><position>101</position><liParams>id="link-sign-up"</liParams></action>
+        </reference> -->
+
+    </customer_logged_out>
+    
+    
+    <!-- PRODUCT VIEW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <catalog_product_view>
+    
+   
+    
+
+        <!-- Change default template for product view. IMPORTANT: the same as in 'review_product_list'. -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="right">
+            <action method="unsetChild"><name>catalog.product.related</name></action>
+        </reference>
+         <reference name="product.info.additional">
+            <action method="unsetChild"><name>product_tag_list</name></action>
+         </reference>
+        <reference name="product.info">
+        
+        <!--Add custom block to get videos in POA template layout, call with getChildHthl() -->
+                     
+            <block type="core/text_list" name="poa_page_banner" as="poa_page_banner" translate="label">
+                <label>POA Page Banner</label>
+            </block>
+            
+        
+        
+            <!--Add Tabs-->
+            
+            <!-- Review Form -->
+            <reference name="tabreviews">
+                <block type="review/form" name="product.review.form" as="review_form">
+                    <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                        <label>Review Form Fields Before</label>
+                        <action method="setMayBeInvisible"><value>1</value></action>
+                    </block>
+                </block>
+            </reference>
+            <!-- end: Review Form -->
+            <block type="cms/block" name="block_product_slidebar_right">
+                <action method="setBlockId"><block_id>block_product_slidebar_right</block_id></action>
+            </block>
+			<block type="core/text_list" name="block_product_slidebar_right" as="block_product_slidebar_right" >
+                <label>Block Product Slidebar Right</label>
+            </block>
+			<block type="core/text_list" name="related_product_view" as="related_products" translate="label">
+                <label>Related Product view</label>
+            </block>
+            <!-- <block type="catalog/product_list_related" name="catalog.product.related" as="related_products" before="-" template="catalog/product/list/related.phtml"/> -->
+            <block type="cms/block" name="block_product_replace_related">
+                <action method="setBlockId"><block_id>block_product_replace_related</block_id></action>
+            </block>
+            <block type="cms/block" name="block_product_replace_upsell">
+                <action method="setBlockId"><block_id>block_product_replace_upsell</block_id></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <!-- CATEGORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+    <!-- Default category (without layered navigation) -->
+    <catalog_category_default>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="left">
+            <remove name="catalog.leftnav"/>
+        </reference>
+
+        <reference name="right">
+            <block type="mtbelano/mainmenu_menu" name="magenthemes.catnav" template="magenthemes/mainmenu/categories.phtml" before="-" />
+            <action method="unsetChild"><name>currency</name></action>
+			<action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+
+        <reference name="product_list">
+            <!-- Custom static blocks -->
+            <block type="cms/block" name="block_category_above_collection">
+                <action method="setBlockId"><block_id>block_category_above_collection</block_id></action>
+            </block>
+            <!-- end: Add static blocks -->
+        </reference>
+    </catalog_category_default>
+
+    <!-- Category with layered navigation -->
+
+    <catalog_category_layered>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="left">
+            <remove name="catalog.leftnav"/>
+        </reference>
+
+        <reference name="right">
+            <block type="mtbelano/mainmenu_menu" name="magenthemes.categoriesnav" template="magenthemes/mainmenu/categories.phtml" before="-" />
+            <!-- Remove currency switcher from sidebar -->
+            <action method="unsetChild"><name>currency</name></action>
+			<action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+			 <block type="catalog/layer_view" name="catalog.rightnav" after="magenthemes.categoriesnav" template="catalog/layer/view.phtml"/>
+        </reference>
+
+        <reference name="product_list">
+            <!-- Custom static blocks -->
+            <block type="cms/block" name="block_category_above_collection">
+                <action method="setBlockId"><block_id>block_category_above_collection</block_id></action>
+            </block>
+            <!-- end: Add static blocks -->
+        </reference>
+
+    </catalog_category_layered>
+
+    <!-- CART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <checkout_cart_index>
+
+        <!-- Custom static blocks -->
+        <reference name="checkout.cart">
+
+        </reference>
+
+    </checkout_cart_index>
+
+    <!-- CHECKOUT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	 
+    <checkout_onepage_index>
+
+        <!-- Block below progress block, inserted directly -->
+        <reference name="right">
+
+        </reference>
+
+        <!-- Block below progress block, inserted directly -->
+        <reference name="left">
+
+        </reference>
+
+    </checkout_onepage_index>
+	
+	<!-- Customer Account %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+     <customer_account_index>
+         <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </customer_account_index>
+	
+	<!--
+Wishlist pages
+-->
+
+    <wishlist_index_index translate="label">
+        
+        <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </wishlist_index_index>
+	
+	<customer_account_edit translate="label">
+        <reference name="left">
+          <action method="unsetChild"><name>left.permanent.callout</name></action>
+		    <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </customer_account_edit>
+	
+	<!--
+Customer account address book
+-->
+
+    <customer_address_index translate="label">
+        <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </customer_address_index>
+	
+	<sales_order_history translate="label">
+       <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </sales_order_history>
+	
+	<review_customer_index translate="label">
+        <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </review_customer_index>
+	
+	<tag_customer_index translate="label">
+        <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </tag_customer_index>
+	
+	<!-- My Applications-->
+
+    <oauth_customer_token_index translate="label">
+        <reference name="left">
+            <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+        </reference>
+    </oauth_customer_token_index>
+    <!-- EOF My Applications-->
+	
+	<newsletter_manage_index translate="label">
+        <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+    </newsletter_manage_index>
+	
+	<downloadable_customer_products translate="label">
+        <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+    </downloadable_customer_products>
+	
+	<sales_billing_agreement_index>
+       <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+    </sales_billing_agreement_index>
+	
+	<sales_recurring_profile_index>
+        <remove name="catalog.compare.sidebar"/>
+			<remove name="left_bottom"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="sale.reorder.sidebar"/>
+			<remove name="right.poll"/>
+    </sales_recurring_profile_index>
+
+	
+    <!-- SEARCH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+    <!-- Quick search -->
+    <catalogsearch_result_index>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="left">
+            <!-- Remove currency switcher from sidebar -->
+            <action method="unsetChild"><name>currency</name></action>
+            <remove name="catalogsearch.leftnav"/>
+        </reference>
+
+        <reference name="right">
+            <block type="mtbelano/mainmenu_menu" name="magenthemes.categoriesnav" template="magenthemes/mainmenu/categories.phtml" before="-" />
+            <!-- Remove currency switcher from sidebar -->
+            <action method="unsetChild"><name>currency</name></action>
+            <action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+            <block type="catalogsearch/layer" name="catalogsearch.rightnav" after="magenthemes.categoriesnav" template="catalog/layer/view.phtml"/>
+        </reference>
+
+    </catalogsearch_result_index>
+
+    <!-- Advanced search -->
+    <catalogsearch_advanced_index>
+
+        <!-- Remove (right) currency switcher from sidebar -->
+        <reference name="left">
+            <action method="unsetChild"><name>right_currency</name></action>
+        </reference>
+
+    </catalogsearch_advanced_index>
+
+    <!-- Advanced search results -->
+    <catalogsearch_advanced_result>
+
+        <!-- Remove (right) currency switcher from RIGHT sidebar -->
+        <reference name="right">
+            <action method="unsetChild"><name>right_currency</name></action>
+        </reference>
+
+    </catalogsearch_advanced_result>
+
+    <!-- REVIEWS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <review_product_list>
+
+        <!-- IMPORTANT: same as 'catalog_product_view'. -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+    </review_product_list>
+
+    <!-- CUSTOMER ACCOUNT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <customer_account>
+
+        <reference name="left">
+            <!-- Remove cart from the left column -->
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+
+            <!-- Remove Compare block, it is already inserted in DEFAULT section -->
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+
+    </customer_account>
+
+	<!-- ALL CMS PAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	<cms_page>
+
+		<!-- Custom static blocks -->
+        <reference name="content">
+
+		</reference>
+
+	</cms_page>
+
+    <!-- Remove static blocks displayed on CMS pages from these pages: home page, 404 no route
+        IMPORTANT: make sure that you use correct ID -->
+    <cms_index_noroute>
+
+    </cms_index_noroute>
+    <cms_index_defaultnoroute>
+
+    </cms_index_defaultnoroute>
+    <cms_index_index>
+
+        <!-- Uncomment to allow MAP functionality on home page -->
+        <!--<update handle="MAP_popup" />-->
+    </cms_index_index>
+	
+	
+	<!-- HOME PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+	<cms_index_index>
+
+        <!-- Preface ====================================================================== -->
+        <reference name="preface">
+        </reference>
+		<!-- Left column ====================================================================== -->
+        <reference name="right">
+            <!-- Disable right sidebar blocks on home page -->
+            <action ifconfig="mtbelano/sidebar_blocks_home/compare" method="unsetChild"><name>catalog.compare.sidebar.right</name></action>
+            <action ifconfig="mtbelano/sidebar_blocks_home/compared" method="unsetChild"><name>right.reports.product.compared</name></action>
+            <action ifconfig="mtbelano/sidebar_blocks_home/viewed" method="unsetChild"><name>left.reports.product.viewed</name></action>
+
+            <action ifconfig="mtbelano/sidebar_blocks_home/wishlist" method="unsetChild"><name>wishlist</name></action>
+            <action ifconfig="mtbelano/sidebar_blocks_home/poll" method="unsetChild"><name>right.poll</name></action>
+            <action ifconfig="mtbelano/sidebar_blocks_home/tags" method="unsetChild"><name>tags_popular</name></action>
+
+            <action ifconfig="mtbelano/sidebar_blocks_home/paypal" method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+
+
+        <!-- Right column ====================================================================== -->
+        <reference name="left">
+            <!-- Disable left sidebar blocks on home page -->
+            <action ifconfig="mtbelano/sidebar_blocks_home/paypal" method="unsetChild"><name>paypal.partner.right.logo</name></action>
+        </reference>
+        <!-- Postscript ====================================================================== -->
+        <reference name="postscript">
+        </reference>
+	</cms_index_index>
+	
+	
+	<contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>    
+        </reference>
+    </contacts_index_index>
+	
+	
+</layout>
+

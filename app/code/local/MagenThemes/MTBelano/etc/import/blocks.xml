@@ -1,0 +1,109 @@
+<root><blocks><cms_block><title><![CDATA[Footer Links]]></title><identifier><![CDATA[footer_links]]></identifier><content><![CDATA[<ul>
+<li><a href="{{store direct_url="about-magento-demo-store"}}">About Us</a></li>
+<li><a href="{{store direct_url="customer-service"}}">Customer Service</a></li>
+<li class="last privacy"><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+</ul>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Top For Fashion 1]]></title><identifier><![CDATA[mt-top-1]]></identifier><content><![CDATA[<div class="content-home-item"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/top1.png"}}" alt="" /> </a></div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Newsletter For Footer]]></title><identifier><![CDATA[newsletter-for-footer]]></identifier><content><![CDATA[<div class="hidde">{{block type="newsletter/subscribe" template="newsletter/subscribe.phtml"}}</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Connect Us]]></title><identifier><![CDATA[connect-us]]></identifier><content><![CDATA[<div class="box-connect hidden-xs">
+<h3>Connect Us</h3>
+   <div class="icon-style-1 icon-size clearafter">
+         <a class="facebook" href="#">
+		     <span class="icon-facebook fa fa-facebook">&nbsp;</span>
+		 </a> 
+		 <a class="twitter" href="#"><span class="icon-twitter fa fa-twitter">&nbsp;</span></a> 
+		 <a class="vimeo" href="#"><span class="icon-vimeo fa fa-vimeo-square">&nbsp;</span></a> 
+		 <a class="youtube" href="#"><span class="icon-youtube fa fa-youtube">&nbsp;</span></a> 
+		 <a class="skype" href="#"><span class="icon-skype fa fa-skype">&nbsp;</span></a> 
+		 <a class="print" href="#"><span class="icon-print fa fa-pinterest">&nbsp;</span></a>
+	</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[About Company]]></title><identifier><![CDATA[about-company]]></identifier><content><![CDATA[<div class="collapsible mobile-collapsible">
+<h3 class="block-title heading">About Company<span class="accordion-footer visible-xs">accordion-footer</span></h3>
+<div class="block-content block-content-statick">
+<div class="feature first last"><img class="icon-about" src="{{media url="wysiwyg/magenthemes/static/about.jpg"}}" alt="About Belano" />
+<div class="block-contact">
+<p class="c-address"><em class="fa fa-map-marker">&nbsp;</em><!--<label>Address</label>--> 304 Floor, 17T3 Building, Hoang Dao Thuy Street, Cau Giay District, Hanoi, Vietnam</p>
+<p class="c-email"><em class="fa fa-envelope-o">&nbsp;</em><!--<label>Email</label>--> <a href="mailto:hello@apl.vn">hello@apl.vn</a></p>
+<p class="c-phone"><em class="fa fa-phone">&nbsp;</em><!--<label>Phone</label>--> +84-462 818 296</p>
+</div>
+<h5><a class="button btn-readmore btn-readmore-about" href="#">Read more</a></h5>
+</div>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Shop By]]></title><identifier><![CDATA[shop-by]]></identifier><content><![CDATA[<div class="collapsible mobile-collapsible">
+<h3 class="block-title heading">Shop By<span class="accordion-footer visible-xs">accordion-footer</span></h3>
+<div class="block-content block-content-statick">
+<ul class="bullet">
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Returns</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Delivery</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Customer Service</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Gift Cards</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Extended Service Plan</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="#">Order status</a></li>
+<li><em class="fa fa-angle-right">&nbsp;</em><a href="{{store direct_url="about-magento-demo-store"}}">About Us</a></li>
+</ul>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Top For Fashion 2]]></title><identifier><![CDATA[mt-top-2]]></identifier><content><![CDATA[<div class="content-home-item"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/top2.jpg"}}" alt="" /> </a></div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Top For Fashion 3]]></title><identifier><![CDATA[mt-top-3]]></identifier><content><![CDATA[<div class="content-home-item">
+  <a href="#">
+      <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/top3.png"}}" alt="" />
+   </a>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Footer Bottom]]></title><identifier><![CDATA[footer-bottom-3]]></identifier><content><![CDATA[<div class="shopping_info ">
+<div class="footer-static">
+<h3>Shopping Info<span class="accordion-footer visible-xs accordion-show">accordion footer</span></h3>
+<ul class="clearfix acc">
+<li class="item first"><a title="" href="#">Returns</a></li>
+<li class="item"><a title="" href="#">Delivery</a></li>
+<li class="item"><a title="" href="#">Customer Service</a></li>
+<li class="item"><a title="" href="#">Gift Cards</a></li>
+<li class="item last"><a title="" href="#">Extended Service Plan</a></li>
+</ul>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Bottom top ]]></title><identifier><![CDATA[main-bottom-top]]></identifier><content><![CDATA[<div class="banner-static">
+<div class="banner col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="content-home-item"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/free-gift-cart.png"}}" alt="" /> </a></div>
+</div>
+<div class="banner col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="content-home-item"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/freeshipping.png"}}" alt="" /></a></div>
+</div>
+<div class="banner col-lg-4 col-md-4 col-sm-4 col-xs-12">
+<div class="content-home-item"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/support247.png"}}" alt="" /> </a></div>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Bottom 1]]></title><identifier><![CDATA[main-bottom-1]]></identifier><content><![CDATA[<div class="block-left-bottom">
+<h3 class="block-title">Sale Off</h3>
+		<p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean solicitudin quis reque integre mea uteueos vide errem noluisse. </p>
+		<h5><a class="button btn-readmore btn-readmore-about" href="#">Read more</a></h5>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Cookie restriction notice]]></title><identifier><![CDATA[cookie_restriction_notice_block]]></identifier><content><![CDATA[<p>This website requires cookies to provide all of its features. For more information on what data is contained in the cookies, please see our <a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy page</a>. To accept cookies from this site, please click the Allow button below.</p>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Bottom 2]]></title><identifier><![CDATA[main-bottom-2]]></identifier><content><![CDATA[<div class="first-block banners-block ">
+<div class="banner banner-transform"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/block1.png"}}" alt="" /> </a></div>
+<div class="title-hover  title-hover-01 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon1.png"}}" alt="" /></div>
+<div class="title-hover title-hover-02 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon2.png"}}" alt="" /></div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Bottom 3]]></title><identifier><![CDATA[main-bottom-3]]></identifier><content><![CDATA[<div class="content-block banners-block ">
+<div class="banner banner-transform"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/block2.png"}}" alt="" /> </a></div>
+<div class="title-hover  title-hover-01 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon3.png"}}" alt="" /></div>
+<div class="title-hover title-hover-02 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon4.png"}}" alt="" /></div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Main Bottom 4]]></title><identifier><![CDATA[main-bottom-4]]></identifier><content><![CDATA[<div class="last-block banners-block ">
+<div class="banner banner-transform"><a href="#"> <img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/block3.png"}}" alt="" /> </a></div>
+<div class="title-hover  title-hover-01 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon5.png"}}" alt="" /></div>
+<div class="title-hover title-hover-02 col-lg-3  col-md-3  col-sm-3  col-xs-12"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/satick-icon6.png"}}" alt="" /></div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Recent Tweets]]></title><identifier><![CDATA[recent-tweets]]></identifier><content><![CDATA[<p><a class="twitter-timeline" href="https://twitter.com/9magentothemes" data-chrome="nofooter transparent" data-widget-id="420054600893206528" data-tweet-limit="2">Tweets by @9magentothemes</a></p>
+<script type="text/javascript">
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[footer_paypal]]></title><identifier><![CDATA[footer_paypal]]></identifier><content><![CDATA[<img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/paypal.png"}}" alt="" />]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[block product 1]]></title><identifier><![CDATA[block-product-1]]></identifier><content><![CDATA[<p><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/product-sibar.png"}}" alt="" /></p>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Static Parallax For Fashion]]></title><identifier><![CDATA[static-parallax-fashion]]></identifier><content><![CDATA[<div class="parallax">
+<div class="block-parallax block-fashion">
+<h2 style="color: #ffffff; margin: 20px 0;">Hello! I'm MT Belano. I'm <span>Awesome</span> Magento Theme</h2>
+<a class="btn-readmore" href="#">Purchase Me Now</a></div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Static Parallax For Fashion 3]]></title><identifier><![CDATA[static-block-fashion-3]]></identifier><content><![CDATA[<div class="parallax block-parallax">
+<div class="block-parallax">
+<h2 style="color: #ffffff;"><em class="fa fa-quote-left">&nbsp;</em>The creative process is a process of surrender, not control.<em class="fa fa-quote-right">&nbsp;</em></h2>
+<div class="quote-author">-- Julia Cameron --</div>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Photo from Flickr For Fashion]]></title><identifier><![CDATA[photo-flickr]]></identifier><content><![CDATA[<div class="collapsible mobile-collapsible">
+<h3 class="block-title heading">Privacy & Legal<span class="accordion-footer visible-xs">accordion-footer</span></h3>
+<div class="block-content block-content-statick block-accessories block-privacy">
+<ul>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#">Cookies & Privacy Policy</a></li>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#">Terms & Conditions</a></li>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#">Accessibility</a></li>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#"> The Company</a></li>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#">Contact Us</a></li>
+<li><i class="fa fa-angle-right">&nbsp;</i><a href="#">Business 2 Business</a></li>
+</ul>
+</div>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block><cms_block><title><![CDATA[Heaader Block]]></title><identifier><![CDATA[header_block]]></identifier><content><![CDATA[<div class="info-class">
+<p class="mttron-icon"><em class="fa fa-mobile">&nbsp;</em> <span class="phone">001 234 567 88/ 66</span></p>
+</div>]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block></blocks></root>

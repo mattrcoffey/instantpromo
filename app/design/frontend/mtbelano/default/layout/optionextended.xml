@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>pektsekye/optionextended.css</stylesheet></action>		
+			<action method="addItem"><type>skin_js</type><name>pektsekye/optionextended_images.js</name></action>			
+			<action method="addItem"><type>skin_js</type><name>pektsekye/optionextended_dependent.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>pektsekye/optionextended_main.js</name></action>			
+		</reference>
+	</default>
+	<catalog_product_view>
+		<reference name="content">
+			<block type="optionextended/product_view_js" name="optionextended" after="product.info" template="optionextended/product/view/js.phtml" />
+		</reference>
+	</catalog_product_view>
+  <ajaxcart_index_options>
+		<reference name="content">
+			<block type="optionextended/product_view_js" name="optionextended" after="product.info" template="optionextended/product/view/js.phtml" />
+		</reference>  
+  </ajaxcart_index_options>    	
+</layout>

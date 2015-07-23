@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Instant_Visuals>
+            <version>0.1.0</version>
+        </Instant_Visuals>
+    </modules>
+    <frontend>
+        <routers>
+            <visuals>
+                <use>standard</use>
+                <args>
+                    <module>Instant_Visuals</module>
+                    <frontName>visuals</frontName>
+                </args>
+            </visuals>
+        </routers>
+
+    </frontend>
+    <admin>
+        <routers>
+            <visuals>
+                <use>admin</use>
+                <args>
+                    <module>Instant_Visuals</module>
+                    <frontName>visuals</frontName>
+                </args>
+            </visuals>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <sales>
+                <children>
+                     <contact translate="title" module="visuals">
+                        <title>Visual Requests</title>
+                        <action>visuals/adminhtml_contact</action>
+                    </contact>
+                </children>
+            </sales>
+        </menu>
+
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <visuals>
+                            <title>Visuals Module</title>
+                            <sort_order>200</sort_order>
+                        </visuals>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <visuals module="visuals">
+                    <file>visuals.xml</file>
+                </visuals>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+
+            <contact>
+                <class>Instant_Visuals_Model</class>
+                <resourceModel>contact_mysql4</resourceModel>
+            </contact>
+            <contact_mysql4>
+                <class>Instant_Visuals_Model_Mysql4</class>
+                <entities>
+                    <contact>
+                        <table>package_contact</table>
+                    </contact>
+                </entities>
+            </contact_mysql4>
+
+        </models>
+        <resources>
+            <visuals_setup>
+                <setup>
+                    <module>Instant_Visuals</module>
+                    <class>Instant_Visuals_Model_Resource_Mysql4_Setup</class>
+                </setup>
+                   <connection>
+                    <use>core_setup</use>
+                </connection>
+            </visuals_setup>
+            <visuals_write>
+                <connection>
+                <use>core_write</use>
+                </connection>
+                </visuals_write>
+            <visuals_read>
+                <connection>
+                <use>core_read</use>
+                </connection>
+            </visuals_read>
+        </resources>
+        <blocks>
+            <contact>
+                <class>Instant_Visuals_Block</class>
+            </contact>
+        </blocks>
+        <helpers>
+            <visuals>
+            <class>Instant_Visuals_Helper</class>
+            </visuals>
+        </helpers>
+    </global>
+</config>

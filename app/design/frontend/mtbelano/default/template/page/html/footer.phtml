@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$theme = $this->helper('mtbelano');
+?>
+<div class="footer-clients hidden-sm hidden-xs container"><img class="img-responsive" style="" alt="Our proposition" src="<?php echo $this->getSkinUrl('images/recent_client_logos.jpg'); ?>" /></div>
+<footer class="footer-container">
+    <div class="footer-top-brands">
+		<div class="container">
+			<div class="footer">
+				<div class="show-grid">
+					<?php echo $this->getChildHtml('footer_brands') ?>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="footer-top">
+		<div class="container">
+			<div class="footer">
+				<div class="show-grid">
+					<?php echo $this->getChildHtml('footer_top') ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+	    <div class="container">
+		    <div class="footer">
+			    <div class="footer-section-container">
+				    <div class="show-grid">
+						<div class="section-space">
+							<?php echo $this->getChildHtml('footer_bottom') ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+	<div class="footer-copyright">
+	    <div class="container">
+		    <div class="footer">
+				<div class="row">
+				    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					   <address><?php echo $this->getCopyright() ?></address>
+					</div>
+					
+					<!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+					   <?//php echo $this->getChildHtml('store_switcher') ?>
+					</div>-->
+					
+					<div class="footer-link col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<img alt="Payment Methods we accept" title="Payment Methods we accept" class="footer-payment pull-right img-responsive" src="<?php echo $this->getSkinUrl('images/payment-cards.png'); ?>">
+					
+					   <? //php echo $this->getChildHtml('footer_paypal') ?>
+					</div>
+				</div>
+				
+			</div>
+		</div> 
+	</div>
+	<div id="back-top" class="hidden-phone">
+		<a href="#top">
+		<div class="sticker-wrapper">
+			<div class="sticker" title="<?php echo $this->__('Back to Top') ?>">
+			<i class="fa fa-angle-up"></i>
+			</div>
+		</div>
+		</a>
+	</div>
+</footer>
+<script type="text/javascript">
+	jQuery(document).ready(function( $ ) {
+		$("img.lazy").show().lazyload({
+			skip_invisible : true
+		});
+
+		$mt(document).on('shown.bs.tab','a[data-toggle="tab"]', function () {
+			$(window).trigger('scroll');
+		});
+
+	});
+</script>
+

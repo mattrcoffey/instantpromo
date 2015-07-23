@@ -1,0 +1,153 @@
+<?php
+//sizes to id
+$arrSizes = [];
+$arrSizes["10ft x 10ft"] = '-10-10';
+$arrSizes["10ft x 15ft"] = '-10-15';
+$arrSizes["10ft x 20ft"] = '-10-20';
+$arrSizes["13ft x 13ft"] = '-13-13';
+$arrSizes["13ft x 26ft"] = '-13-26';
+
+$packages = Mage::getModel('package/package')->getCollection()->addFilter('status',1);
+$cnt = 0;
+$active = '';
+?>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="lead">Our Package Deals are designed to make the process of buying a new custom printed tent as easy as possible! Every printed panel that you see in each package comes with<strong> <span style="text-decoration: underline;">UNLIMITED</span></strong> printing and unlimited colors! If you like one of these packages all you need to decide on is the frame range you want to go for - click the Frame Options tab above for more information on our Pro Expo, Trader and Steel Sport Series frames.&nbsp;</p>
+        <p><strong>Found a package you like? </strong><br />1. Click on the FREE Visual tab above<br />2. Fill out your contact details<br />3. Select the package you're interested in<br />4. Upload your logos, click Submit</p>
+        <p>....and we'll do the rest! Within 24hrs a member of our Sales Team will contact you with your visual and an itemised quote that provides you with prices in each of our three frame ranges.</p>
+        <hr />
+    </div>
+    <div class="col-md-3"><!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-stacked stacked">
+            <?php foreach($packages as $package): ?>
+               <?php if($cnt === 0) { $active = 'active'; }
+                else { $active = '';} ?>
+                <li class="<?= $active; ?>" package="<?= $package->getData('title'); ?>"><a href="#<?= $package->getData('htmlId'); ?>" data-toggle="tab"><?= $package->getData('title'); ?></a></li>
+                <?php $cnt++ ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="col-md-9"><!-- Tab panes -->
+        <div id="packageDetail" class="tab-content stacked-tabs">
+            <?php
+            $cnt = 0;
+            $active = '';
+            ?>
+            <?php foreach($packages as $package): ?>
+                <?php if($cnt === 0) { $active = 'active'; }
+                else { $active = 'fade';}  ?>
+
+                <?php
+                $sizes = Mage::getModel('size/size')->getCollection()->addFilter('package_id',$package->getId())->addFilter('status',1)->setOrder('size', 'asc');
+                $scnt = 0;
+                $sactive = '';
+                ?>
+
+                <div id="<?= $package->getData('htmlId'); ?>" class="tab-pane <?= $active; ?>">
+                    <div class="row">
+                        <?php if(count($sizes) > 1): ?>
+                            <div class="size-options"><span>Size options</span>
+                                <ul>
+                                    <?php foreach($sizes as $size): ?>
+                                        <?php if($scnt === 0) { $sactive = 'active'; }
+                                        else { $sactive = '';}
+                                        $elemid = $package->getData('htmlId') . $arrSizes[$size->getData('size')];
+                                        ?>
+                                        <li class="<?= $sactive ?>" packSize="<?= $size->getData('size'); ?>"><a href="#<?= $elemid; ?>" data-toggle="tab"><span><?= $size->getData('size');?><br /></span></a></li>
+                                        <?php $scnt++; ?>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                        <?php
+                        $scnt = 0;
+                        $sactive = '';
+
+                        ?>
+                        <div class="tab-content stacked-tabs">
+                            <?php foreach($sizes as $size): ?>
+                                <?php
+                                unset($boltons);
+                                $boltons = [];
+                                if($size->getData('image_bolt1')) array_push($boltons,$size->getData('image_bolt1'));
+                                if($size->getData('image_bolt2')) array_push($boltons,$size->getData('image_bolt2'));
+                                if($size->getData('image_bolt3')) array_push($boltons,$size->getData('image_bolt3'));
+                                $bcnt = 0;
+
+                                ?>
+                                <?php if($scnt === 0) { $sactive = 'active'; }
+                                else { $sactive = '';}
+                                $elemid = $package->getData('htmlId') . $arrSizes[$size->getData('size')];
+                                ?>
+                                <div id="<?= $elemid; ?>" class="tab-pane <?= $sactive; ?>">
+                                    <div class="col-md-5">
+                                        <h2 class="top-m-0 header-stroke"><span><?= $package->getData('title'); ?></span></h2>
+                                        <? if($size->getData('description')) {
+                                            echo $size->getData('description');
+                                        } else {
+                                            echo $package->getData('description');
+                                        } ?>
+                                        <ul>
+                                            <li class="thumb-li"><span style="font-size: medium;"><a target="_self" href="#" package="<?= $package->getData('title'); ?>" packSize="<?= $size->getData('size'); ?>" class="moreInfo">Click here to request more information and a free visual</a></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-7"><a href="<?= $package->getData('link'); ?>" target="_self"><img class="img-responsive lazy size-image" data-original="/media/<?= $size->getData('image'); ?>" alt="" /></a></div>
+                                    <?php if(count($boltons) > 0): ?>
+                                        <?php $bcnt = 0; ?>
+                                        <div class="boltOns">
+                                            <h3>Bolt Ons: </h3>
+                                            <ul>
+                                                <li class="active" img="/media/<?= $size->getData('image'); ?>"><span>None</span></li>
+                                                <?php foreach($boltons as $bolt): ?>
+                                                    <li img="/media/<?= $bolt; ?>""><span><?= $bcnt + 1 ;?></span></li>
+                                                    <?php $bcnt++; ?>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+                                <?php $scnt++; ?>
+
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+                <?php $cnt++; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        jQuery(document).ready(function( $ ) {
+            $('.boltOns li').on('click', function(){
+                var img = $(this).attr('img');
+                var parent = $(this).closest('div.active');
+                $('.size-image', parent).attr('src', img);
+                $('.boltOns li.active').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $('a.moreInfo').on('click', function(){
+                var package = $(this).attr('package');
+                var size = $(this).attr('packSize');
+                //var img = $(this).parent().find('.size-image').attr('src');
+                var img = $('.size-image', $(this).closest('.tab-pane')).attr('src');
+
+                $('#poa-product-interested').val(package);
+                $('#poa-product-size').val(size);
+                $('#poa-form-pic').attr('data-original', img);
+
+                $mt('.nav-tabs a[href="#quote"]').tab('show');
+                setTimeout(function(){ $('#name').focus(); }, 500);
+
+            });
+        });
+
+    </script>
+<!--End Row-->
+
+
+

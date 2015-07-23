@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Instant_Pdfupload>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Instant_Pdfupload>
+    </modules>
+</config>
