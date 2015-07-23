@@ -1,0 +1,106 @@
+<?php
+/**
+ * @category    MT
+ * @package     MT_Widget
+ * @copyright   Copyright (C) 2008-2013 MagentoThemes.net. All Rights Reserved.
+ * @license     GNU General Public License version 2 or later
+ * @author      MagentoThemes.net
+ * @email       support@magentothemes.net
+ */
+?>
+<?php
+$blocks     = $this->getBlocks();
+$id         = $this->getConfig('id');
+$column     = $this->getConfig('column');
+$scroll     = $this->getConfig('scroll');
+$title      = $this->getConfig('widget_title');
+?>
+<?php if ($scroll == 1):?>
+    <script type="text/javascript">
+        $mt(document).ready(function(){
+            var itemsCount = getFlexSliderItemWidth('<?php echo $id?>', <?php echo $this->getConfig('responsive')?>, 'column');
+            $mt('#<?php echo $id?>').flexslider({
+			    animationSpeed: 400,            //Integer: Set the speed of animations, in milliseconds
+			    direction: '<?php echo $this->getConfig('direction')?>',
+                namespace: '<?php echo $this->getConfig('namespace')?>',
+                slideshow: <?php echo $this->getConfig('autoplay')?>,
+                slideshowSpeed: <?php echo $this->getConfig('speed')?>,
+                animationLoop: <?php echo $this->getConfig('loop')?>,
+                controlNav: <?php echo $this->getConfig('paging')?>,
+                animation: "slide",
+                itemWidth: getFlexSliderItemWidth('<?php echo $id?>', <?php echo $this->getConfig('responsive')?>, 'width'),
+                itemMargin: <?php echo $this->getConfig('margin')?>,
+                minItems: itemsCount,
+                maxItems: itemsCount,
+                selector: ".slides > .slide",
+                move: <?php echo $this->getConfig('move')?>,
+                onResize: function(slider){
+                    var itemsCount = getFlexSliderItemWidth('<?php echo $id?>', <?php echo $this->getConfig('responsive')?>, 'column');
+                    slider.vars.minItems = itemsCount;
+                    slider.vars.maxItems = itemsCount;
+                }
+            });
+        });
+    </script>
+<?php endif ?>
+<div class="slider-block-wrapper parallax-block-content <?php echo $scroll==1 ? ' flexslider' : ''?>" id="<?php echo $id ?>">
+    <?php if ($title):?><h2><?php echo $title?></h2><?php endif ?>
+    <div class="slides row">
+        <?php foreach ($blocks as $block): ?>
+            <div class="slide <?php echo $block['class']?>">
+                <?php echo $block['content']?>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <?php if ($this->getConfig('parallax')):?>
+        <?php if ($this->getConfig('bg_type') == 'video'):?>
+            <div id="<?php echo $id?>-video"></div>
+            <script type="text/javascript">
+                insertVideoBackground('<?php echo $id?>', <?php echo $this->getConfig('video')?>);
+            </script>
+            <style type="text/css">
+                #<?php echo $id?>-video{position: absolute; z-index: -999; left: 0; top: 0;}
+            </style>
+			<div id="<?php echo $id?>-overlay" style="position: absolute;left: 0;top: 0;width: 100%;height: 100%;z-index: -999;" class="<?php echo $this->getConfig('bg_over')?>">
+                <i class="fa fa-spinner fa-spin" style="font-size: 30px;color: #fff;position: absolute;left: 50%;top: 10px;"></i>
+            </div>
+        <?php else: ?>
+            <script type="text/javascript">
+                $mt.getScript({
+					url: '<?php echo Mage::getUrl('js')?>mt/extensions/jquery/plugins/jquery.parallax-1.1.3.js',
+					success: function(){
+						$mt('#<?php echo $id?>').parallax('50%', <?php echo $this->getConfig('bg_vel')?>);
+					}
+				});
+            </script>
+        <?php endif ?>
+        <style type="text/css">
+            #<?php echo $id?>{
+                    <?php if ($this->getConfig('bg_type') == 'image'):?>
+                    background-image: url(<?php echo $this->getConfig('bg_url')?>);
+                    background-size: <?php echo $this->getConfig('bg_size')?>;
+                    background-position: <?php echo $this->getConfig('bg_position')?>;
+                    background-repeat: <?php echo $this->getConfig('bg_repeat')?>;
+                    background-attachment: fixed;
+                    <?php endif ?>
+                    position: relative;
+                    z-index:0;
+                    overflow: hidden;
+                }
+            <?php if ($this->getConfig('bg_over') != 'none'):?>
+            .twoxtwo{
+                background: url(<?php echo Mage::getUrl('js')?>mt/widget/images/gridtile.png) repeat;
+            }
+            .twoxtwowhite{
+                background: url(<?php echo Mage::getUrl('js')?>mt/widget/images/gridtile_white.png) repeat;
+            }
+            .threexthree{
+                background: url(<?php echo Mage::getUrl('js')?>mt/widget/images/gridtile_3x3.png) repeat;
+            }
+            .threexthreewhite{
+                background: url(<?php echo Mage::getUrl('js')?>mt/widget/images/gridtile_3x3_white.png) repeat;
+            }
+            <?php endif ?>
+        </style>
+    <?php endif ?>
+</div>

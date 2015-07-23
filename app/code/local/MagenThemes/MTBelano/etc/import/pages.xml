@@ -1,0 +1,16 @@
+<root><pages><cms_block><title>Responsive magento themes MT Belano</title><identifier>home</identifier><content><![CDATA[<p>&nbsp;</p>
+<!--<p>{{widget type="widgetproductslist/widget_products" widget_title="Products List" category_id="3" is_mode="latest" template="magenthemes/widgetproductslist/productslist.phtml" product_count="4" show_items="4" is_column="4" item_width="260"}}</p>
+<div class="mt-banner row clearfix">
+<div class="mt-banner-1 col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/static04.png"}}" alt="" /></a></div>
+<div class="mt-banner-2 col-lg-6 col-md-6 col-sm-6 col-xs-12"><a href="#"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/static04.png"}}" alt="" /></a></div>
+</div>
+<div class="mt-userwrap row clearfix">
+<div class="left-userwrap col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<div class="top"><a href="#"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/static06.png"}}" alt="" /></a></div>
+<div class="bottom"><a href="#"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/static07.png"}}" alt="" /></a></div>
+</div>
+<div class="right-userwrap col-lg-8 col-md-8 col-sm-8 col-xs-8">
+<div><a href="#"><img class="img-responsive" src="{{media url="wysiwyg/magenthemes/static/static08.png"}}" alt="" /></a></div>
+</div>
+</div>
+<p>{{widget type="widgetproductslist/widget_products" widget_title="Products Scroller " category_id="3" is_mode="latest" template="magenthemes/widgetproductslist/productsscroller.phtml" product_count="10" show_items="4" is_column="4" item_width="210"}}</p>-->]]></content><is_active>1</is_active><stores><item>0</item></stores></cms_block></pages></root>

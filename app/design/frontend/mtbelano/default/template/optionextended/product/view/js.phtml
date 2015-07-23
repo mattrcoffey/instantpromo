@@ -1,0 +1,36 @@
+<?php if ($this->hasOptions() && !empty($this->config)):?>
+  <script type="text/javascript">	
+  //<![CDATA[
+
+    OptionExtended.Config = {	
+	
+	    mainImageId : 'image', // Id of the Product main image tag <img id="image"
+	    
+	    spacer     : '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>',	
+	    imageTitle : '<?php echo $this->jsQuoteEscape($this->__('Click to Enlarge')) ?>',
+	    imagePopup : 'popWin({{url}}, \'gallery\', \'width=300,height=300,left=50,top=50,location=no,status=yes,scrollbars=yes,resizable=yes\');',
+	
+	    imageDirUrl       : '<?php echo $this->getProductBaseMediaUrl() ?>',
+	    thumbnailDirUrl   : '<?php echo $this->getThumbnailDirUrl() ?>',
+	    pickerImageDirUrl : '<?php echo $this->getPickerImageDirUrl() ?>',    
+	    placeholderUrl    : '<?php echo $this->getPlaceholderUrl() ?>',	
+	    inPreconfigured   : <?php echo $this->getInPreconfigured() ?>,
+	    
+	    description : '<div class="truncated" {{style}} id="optionextended_description_{{optionId}}">' +
+								    '<img src="<?php echo Mage::getDesign()->getSkinUrl('pektsekye/info_icon.gif') ?>"  />' +	
+								    '		<div class="truncated_full_value">' +
+								    '			<dl class="item-options">' +
+								    '				<dd id="optionextended_description_dd_{{optionId}}">{{description}}<\/dd>' +
+								    '		  <\/dl>' +
+								    '		<\/div>' +
+								    '<\/div>',
+								
+	    config : <?php echo $this->getConfig() ?>
+	
+    };
+
+    var optionExtended = new OptionExtended.Main();	
+
+  //]]>
+  </script>
+<?php endif; ?>

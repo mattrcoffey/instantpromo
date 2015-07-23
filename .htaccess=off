@@ -1,0 +1,361 @@
+############################################
+## uncomment these lines for CGI mode
+## make sure to specify the correct cgi php binary file name
+## it might be /cgi-bin/php-cgi
+
+#    Action php5-cgi /cgi-bin/php5-cgi
+#    AddHandler php5-cgi .php
+
+############################################
+## GoDaddy specific options
+
+#   Options -MultiViews
+
+## you might also need to add this line to php.ini
+##     cgi.fix_pathinfo = 1
+## if it still doesn't work, rename php.ini to php5.ini
+
+############################################
+## this line is specific for 1and1 hosting
+
+    #AddType x-mapp-php5 .php
+    #AddHandler x-mapp-php5 .php
+
+############################################
+## default index file
+
+    DirectoryIndex index.php
+
+<IfModule mod_php5.c>
+
+############################################
+## adjust memory limit
+
+#    php_value memory_limit 64M
+    php_value memory_limit 256M
+    php_value max_execution_time 18000
+
+############################################
+## disable magic quotes for php request vars
+
+    php_flag magic_quotes_gpc off
+
+############################################
+## disable automatic session start
+## before autoload was initialized
+
+    php_flag session.auto_start off
+
+############################################
+## enable resulting html compression
+
+    #php_flag zlib.output_compression on
+
+###########################################
+# disable user agent verification to not break multiple image upload
+
+    php_flag suhosin.session.cryptua off
+
+###########################################
+# turn off compatibility with PHP4 when dealing with objects
+
+    php_flag zend.ze1_compatibility_mode Off
+
+</IfModule>
+
+<IfModule mod_security.c>
+###########################################
+# disable POST processing to not break multiple image upload
+
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_deflate.c>
+
+############################################
+## enable apache served files compression
+## http://developer.yahoo.com/performance/rules.html#gzip
+
+    # Insert filter on all content
+    ###SetOutputFilter DEFLATE
+    # Insert filter on selected content types only
+    #AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+
+    # Netscape 4.x has some problems...
+    #BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+    # Netscape 4.06-4.08 have some more problems
+    #BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+    # MSIE masquerades as Netscape, but it is fine
+    #BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+    # Don't compress images
+    #SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+
+    # Make sure proxies don't deliver the wrong content
+    #Header append Vary User-Agent env=!dont-vary
+
+</IfModule>
+
+<IfModule mod_ssl.c>
+
+############################################
+## make HTTPS env vars available for CGI mode
+
+    SSLOptions StdEnvVars
+
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+############################################
+## enable rewrites
+
+    Options +FollowSymLinks
+    RewriteEngine on
+
+############################################
+## you can put here your magento root folder
+## path relative to web root
+
+    #RewriteBase /magento/
+    
+    
+  
+
+############################################
+## uncomment next line to enable light API calls processing
+
+#    RewriteRule ^api/([a-z][0-9a-z_]+)/?$ api.php?type=$1 [QSA,L]
+
+############################################
+## rewrite API2 calls to api.php (by now it is REST only)
+
+    RewriteRule ^api/rest api.php?type=rest [QSA,L]
+
+############################################
+## workaround for HTTP authorization
+## in CGI environment
+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+############################################
+## TRACE and TRACK HTTP methods disabled to prevent XSS attacks
+
+    RewriteCond %{REQUEST_METHOD} ^TRAC[EK]
+    RewriteRule .* - [L,R=405]
+
+############################################
+## redirect for mobile user agents
+
+    #RewriteCond %{REQUEST_URI} !^/mobiledirectoryhere/.*$
+    #RewriteCond %{HTTP_USER_AGENT} "android|blackberry|ipad|iphone|ipod|iemobile|opera mobile|palmos|webos|googlebot-mobile" [NC]
+    #RewriteRule ^(.*)$ /mobiledirectoryhere/ [L,R=302]
+
+############################################
+## always send 404 on missing files in these folders
+
+    RewriteCond %{REQUEST_URI} !^/(media|skin|js)/
+
+############################################
+## never rewrite for existing files, directories and links
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+
+############################################
+## rewrite everything else to index.php
+
+    RewriteRule .* index.php [L]
+    
+
+</IfModule>
+
+
+############################################	
+	
+
+
+############################################
+## Prevent character encoding issues from server overrides
+## If you still have problems, use the second line instead
+
+    AddDefaultCharset Off
+    #AddDefaultCharset UTF-8
+
+<IfModule mod_expires.c>
+
+############################################
+## Add default Expires header
+## http://developer.yahoo.com/performance/rules.html#expires
+
+    ExpiresDefault "access plus 1 year"
+
+</IfModule>
+
+############################################
+## By default allow all access
+
+    Order allow,deny
+    Allow from all
+
+###########################################
+## Deny access to release notes to prevent disclosure of the installed Magento version
+
+    <Files RELEASE_NOTES.txt>
+        order allow,deny
+        deny from all
+    </Files>
+
+############################################
+## If running in cluster environment, uncomment this
+## http://developer.yahoo.com/performance/rules.html#etags
+
+    #FileETag none
+    
+    
+	#Custom SEO 301
+Redirect 301	/graphic_design	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/custom_products	http://www.instantawnings.co.uk/instant-inflatables/custom.html
+Redirect 301	/flag_brackets	http://www.instantawnings.co.uk/instant-displays/flag-bases.html
+Redirect 301	/event_management	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/care_repair	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/colour_options	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html
+Redirect 301	/client_testimonials	http://www.instantawnings.co.uk/testimonials
+Redirect 301	/catalogrequest	http://www.instantawnings.co.uk/contacts/
+Redirect 301	/help	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/blog	http://www.instantawnings.co.uk/blog
+Redirect 301	/our_clients	http://www.instantawnings.co.uk/testimonials
+Redirect 301	/package_deals	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#packages
+Redirect 301	/links	http://www.instantawnings.co.uk/sitemap/
+Redirect 301	/igallery	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#gallery
+Redirect 301	/gazebos	http://www.instantawnings.co.uk/instant-awnings/
+Redirect 301	/comparison	http://www.instantawnings.co.uk/instant-awnings/
+Redirect 301	/blog/all_mine_cakes	http://www.instantawnings.co.uk/latest-news/all-mine-cakes/
+Redirect 301	/blog/cambridge_university_womens_boat_club	http://www.instantawnings.co.uk/latest-news/tag/boat+race/
+Redirect 301	/blog/inflatable_gazebo_6m_6m	http://www.instantawnings.co.uk/inflatable-gazebo.html
+Redirect 301	/inflatables-faq	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/customer-service	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/?s=	http://www.instantawnings.co.uk/
+Redirect 301	/about-instant-promotions	http://www.instantawnings.co.uk/about-instant-promotion/
+Redirect 301	/catalog/seo_sitemap/product	http://www.instantawnings.co.uk/sitemap/
+Redirect 301	/instant-trader-package	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#packages
+Redirect 301	/branded-instant-marquees	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html
+Redirect 301	/instant-awnings-faq	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#faq
+Redirect 301	/instant-displays.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/inflatable-shells.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/produits-publicite-xterieure	http://www.instantawnings.co.uk/
+Redirect 301	/blog/inflatable-spheres	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/blog/new-inflatables	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/blog/valance-wrap	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/blog/inflatable-gazebo	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-gazebo.html
+Redirect 301	/inflatable-tunnels.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-tubes.html
+Redirect 301	/valance-wrap.html	http://www.instantawnings.co.uk/valance-wrap.html
+Redirect 301	/pvc-banners.html	http://www.instantawnings.co.uk/instant-displays/pvc-banners.html
+Redirect 301	/inflatable-gazebo.html	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-gazebo.html
+Redirect 301	/instant-displays-faq	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-awnings.html	http://www.instantawnings.co.uk/instant-awnings/
+Redirect 301	/inflatable-advertising-balloons.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/blog/inflatable-advertising-products	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/express-40-3x3m.html	http://www.instantawnings.co.uk/express-40-aluminium.html
+Redirect 301	/roller-banner-exhibition.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/express-40-3x6m.html	http://www.instantawnings.co.uk/express-40-aluminium.html
+Redirect 301	/roller-wheel-carrybag.html	http://www.instantawnings.co.uk/awning-accessories/roller-bag.html
+Redirect 301	/inflatable-impact-cube.html	http://www.instantawnings.co.uk/spare-parts/pro-50-spares/
+Redirect 301	/inflatable-advertising-tubes.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-tubes.html
+Redirect 301	/teardrop-banner-flag.html	http://www.instantawnings.co.uk/instant-displays/custom-teardrop-flags.html
+Redirect 301	/sail-flag-banners.html	http://www.instantawnings.co.uk/instant-displays/custom-teardrop-flags.html
+Redirect 301	/inflatable-arch-gantry.html	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-arch.html
+Redirect 301	/express-40-3x45m.html	http://www.instantawnings.co.uk/express-40-aluminium.html
+Redirect 301	/printed-aluminium-parasols.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/inflatable-promo-cube.html	http://www.instantawnings.co.uk/instant-inflatables/custom.html
+Redirect 301	/spider-dome-pro.html	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-pro.html
+Redirect 301	/productos-de-publicidad-exterior	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-pro.html
+Redirect 301	/instant-event-package.html	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html
+Redirect 301	/inflatable-cube-marquees.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-cube-marquee.html
+Redirect 301	/pro-40-3x3m.html	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/breeze-banner-flag.html	http://www.instantawnings.co.uk/flag-bases.html
+Redirect 301	/instant-inflatables/inflatable-tubes.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-tubes.html
+Redirect 301	/igallery/category/view/id/6	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#gallery
+Redirect 301	/igallery/category/view/id/10	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#gallery
+Redirect 301	/pro-40-3x3m-2.html	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/the-instant-exhibition-package.html	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#packages
+Redirect 301	/instant-awnings-trader-package.html	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#packages
+Redirect 301	/pro-40-3x4-5m.html	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/igallery/category/view/id/8	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#gallery
+Redirect 301	/utomhusreklam-produkter-och-omedelbar-cirkustalt	http://www.instantawnings.co.uk/custom-printed-instant-awnings.html#gallery
+Redirect 301	/instant-awnings/awnings-accessories.html	http://www.instantawnings.co.uk/awning-accessories/
+Redirect 301	/instant-inflatables/inflatable-shells.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/igallery/category/view/id/11	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/igallery/category/view/id/5	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables/inflatable-tunnels.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-tubes.html
+Redirect 301	/igallery/category/view/id/9	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/igallery/category/view/id/2	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables/inflatable-blimps.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/genesis-roll-up-banner.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-inflatables/inflatable-arches.html	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-arch.html
+Redirect 301	/blog/instant-inflatable-garage-workshop	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables/inflatable-marquees.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-cube-marquee.html
+Redirect 301	/pop-up-display-counter.html	http://www.instantawnings.co.uk/instant-displays/pop-up-exhibition-counter.html
+Redirect 301	/double-leg-inflatable-arch.html	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-arch.html
+Redirect 301	/blog/milwaukee-inflatable-spider-dome	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-xl.html
+Redirect 301	/5m-giant-outdoor-flag.html	http://www.instantawnings.co.uk/instant-displays/custom-giant-flag.html
+Redirect 301	/blog/helly-hansen-inflatable-arch	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-arch.html
+Redirect 301	/express-40-3x3m-compact.html	http://www.instantawnings.co.uk/instant-displays/compact-express-40.html
+Redirect 301	/spider-dome-package-overlay	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-displays/exhibition-display-accessories.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/pro-50-3m-x-3m.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/pro-50-instant-awning-3x6m.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/instant-displays/pop-up-displays.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-inflatables/inflatable-advertising-tubes.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables/inflatable-advertising-balloons.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/pro-50-instant-awning-4x8m.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/pro-50-4m-x-4m.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/durable-cassette-graphic-banner-stand.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/pro-50-instant-awning-10x15ft.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/instant-inflatables/spider-dome-xl.html	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-xl.html
+Redirect 301	/instant-inflatables/spider-dome-expo.html	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-expo.html
+Redirect 301	/clarke-ig1000-1kw-inverter-generator.html	http://www.instantawnings.co.uk/awning-accessories/
+Redirect 301	/instant-inflatables/inflatable-spider-domes.html	http://www.instantawnings.co.uk/instant-inflatables/spider-dome-expo.html
+Redirect 301	/instant-inflatables/inflatable-arches/inflatable-arch.html	http://www.instantawnings.co.uk/instant-inflatables/custom-printed-inflatable-arch.html
+Redirect 301	/instant-inflatables/inflatable-marquees/inflatable-billboard.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-inflatables/inflatable-blimps/inflatable-blimps.html	http://www.instantawnings.co.uk/instant-inflatables/
+Redirect 301	/instant-displays/feather-teardrop-flag-banners.html	http://www.instantawnings.co.uk/feather-flag-pro.html
+Redirect 301	/instant-displays/pop-up-exhibition-counters.html	http://www.instantawnings.co.uk/instant-displays/pop-up-exhibition-counter.html
+Redirect 301	/instant-inflatables/inflatable-marquees/inflatable-marquees.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-cube-marquee.html
+Redirect 301	/instant-awnings/awnings-accessories/gazebo-weight-plates.html	http://www.instantawnings.co.uk/awning-accessories/19kg-gazebo-weights.html
+Redirect 301	/instant-inflatables/inflatable-tubes/inflatable-advertising-tubes.html	http://www.instantawnings.co.uk/instant-inflatables/inflatable-tubes.html
+Redirect 301	/budget-roller-banner-stand-with-changeable-graphics.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-awnings/instant-awnings-pro-50-range.html	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/instant-awnings/express-40-instant-awning-range.html	http://www.instantawnings.co.uk/express-40-aluminium.html
+Redirect 301	/instant-awnings/instant-awnings-pro-40-range.html	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/pro-40-2-5m-x-2-5m.html	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/instant-displays/feather-teardrop-flag-banners/feather-flags.html	http://www.instantawnings.co.uk/flag-bases.html
+Redirect 301	/instant-displays/exhibition-display-accessories/zed-up-stand.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-awnings/awnings-accessories/marquee-ground-bar-system.html	http://www.instantawnings.co.uk/awning-accessories/ground-bar-system.html
+Redirect 301	/four-sided-carousel-literature-stand-high-quality-exhibition-products.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/display-plinth-counter-400mm-600mm-pop-up-exhibition-counters.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-awnings/awnings-accessories/weight-bags-set-of-four.html	http://www.instantawnings.co.uk/awning-accessories/weight-bags.html
+Redirect 301	/instant-awnings/awnings-accessories/weighted-foot-plates-set-of-four.html	http://www.instantawnings.co.uk/awning-accessories/13kg-gazebo-weights.html
+Redirect 301	/instant-awnings/awnings-accessories/weighted-foot-plates-set-of-four-1.html	http://www.instantawnings.co.uk/awning-accessories/13kg-gazebo-weights.html
+Redirect 301	/instant-awnings/instant-awnings-pro-40-range.html?dir=desc&order=position	http://www.instantawnings.co.uk/pro-40-range.html
+Redirect 301	/slim-lightweight-10-a4-pocket-wire-literature-stand-exhibition-display-equipment.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-awnings/instant-awnings-pro-50-range.html?dir=desc&order=position	http://www.instantawnings.co.uk/pro-50-range.html
+Redirect 301	/instant-awnings/awnings-accessories/ratchet-tie-down-kit-set-of-four-ratchets.html	http://www.instantawnings.co.uk/awning-accessories/ratchet-strap-set.html
+Redirect 301	/instant-displays/pop-out-display-banner/pop-out-banner-branded-outdoor-display-banners.html	http://www.instantawnings.co.uk/instant-displays/pop-out-banners.html
+Redirect 301	/instant-displays/pop-up-displays/veloce-magnetic-pop-up-display-instant-displays-exhibition-equipment.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-displays/roll-up-exhibition-banners/widescreen-roller-banner-stand-1m-to-2m-width.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-displays/pop-up-displays/complete-pop-up-display-stand-5-panel-pop-up-display-system.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-displays/pop-out-display-banner.html	http://www.instantawnings.co.uk/instant-displays/pop-out-banners.html
+Redirect 301	/instant-displays/roll-up-exhibition-banners.html	http://www.instantawnings.co.uk/instant-displays/roller-banners.html
+Redirect 301	/instant-displays/exhibition-display-accessories/cantilever-literature-stand.html	http://www.instantawnings.co.uk/instant-displays/
+Redirect 301	/instant-awnings/awnings-accessories/guttering-system.html	http://www.instantawnings.co.uk/awning-accessories/gazebo-gutter-system.html
+Redirect 301	/instant-awnings/awnings-accessories/frame-dust-cover.html	http://www.instantawnings.co.uk/awning-accessories/frame-cover.html
+Redirect 301	/catalog/seo_sitemap/product/client_testimonials	http://www.instantawnings.co.uk/testimonials
+Redirect 301	/instant-awnings/awnings-accessories.html?p=2	http://www.instantawnings.co.uk/awning-accessories/
+Redirect 301	/instant-displays/feather-teardrop-flag-banners.html?dir=asc&order=name	http://www.instantawnings.co.uk/flag-bases.html
+Redirect 301	/instant-displays/feather-teardrop-flag-banners.html?dir=desc&order=position	http://www.instantawnings.co.uk/flag-bases.html

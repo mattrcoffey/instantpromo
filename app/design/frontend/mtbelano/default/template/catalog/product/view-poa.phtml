@@ -1,0 +1,769 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $theme = $this->helper('mtbelano');?>
+<?php
+    $oType = false;
+    foreach ($_product->getOptions() as $o) {
+        $optionType = $o->getType();
+        if ($optionType == 'file') {
+            $oType = true;
+        }
+    }
+?>
+<?php
+$section = array();
+$layout = $theme->getCfg('product_page/layout');
+$replaceRelated = $theme->getCfg('product_page/replace_related');
+if ($replaceRelated == 1) //don't replace with static block
+{
+    if ($tmpHtml = trim($this->getChildHtml('related_products')))
+        $section['related'] = $tmpHtml;
+    //$section['related'] = trim($this->getChildHtml('related_products'));
+}
+elseif ($replaceRelated == 2) //if related is empty, replace with static block
+{
+    if ($tmpHtml = trim($this->getChildHtml('related_products')))
+        $section['related'] = $tmpHtml;
+    else //related empty
+    if ($tmpHtml = $this->getChildHtml('block_product_replace_related'))
+        $section['related'] = '<div class="block_product_replace_related">'. $tmpHtml .'</div>';
+}
+elseif ($replaceRelated == 3) //replace with static block
+{
+    if ($tmpHtml = $this->getChildHtml('block_product_replace_related'))
+        $section['related'] = '<div class="block_product_replace_related">'. $tmpHtml .'</div>';
+}
+
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+    <div class="product-essential row show-grid">
+   
+   
+   
+        <div class="no-display col-lg-12">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        
+        
+        
+        
+        <div class="row">
+        
+        <div class="col-md-12">
+        
+        
+        <div class="product-name-poa">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+           <p class="lead"><?php echo $_product->getShortDescription(); ?></p>
+            
+        </div></div>
+        
+        <div class="row bottom-m-2"><div class="col-md-12"><?php echo $this->getChildHtml('poa_page_banner') ?></div></div>
+        
+        
+        <div class="row">        
+ 
+ 
+<!--check array for tabs to display-->
+
+<? $_tabs_list =  $_product->getAttributeText('visible_tabs') ?>
+<? //php echo $_tabs_list ?>
+        <div class="col-md-12">   
+        
+        <!-- Nav tabs -->
+<ul class="nav nav-tabs">
+<? if (in_array("Introduction",$_tabs_list)) : ?>
+  <li class="active"><a href="#info" data-toggle="tab">Intro</a></li>
+   <? endif; ?>
+    <? if (in_array("Photos",$_tabs_list)) : ?>
+  <li><a href="#gallery" data-toggle="tab">Photos</a></li>
+  <? endif; ?>
+   <? if (in_array("Packages",$_tabs_list)) : ?>
+  <li><a href="#packages" data-toggle="tab">Packages</a></li>
+  <? endif; ?>
+    <? if (in_array("How does it work?",$_tabs_list)) : ?>
+  <li><a href="#how-does-it-work" data-toggle="tab">How does it work?</a></li>
+   <? endif; ?>  
+    <? if (in_array("Product Options",$_tabs_list)) : ?>
+  <li><a href="#product-options" data-toggle="tab">Product Options</a></li>
+  <? endif; ?>
+   <? if (in_array("Size Options",$_tabs_list)) : ?>
+  <li><a href="#size-options" data-toggle="tab">Size Options</a></li>
+   <? endif; ?> 
+     <? if (in_array("Frame & Size Options",$_tabs_list)) : ?>
+  <li><a href="#frame-options" data-toggle="tab">Frame &amp Size Options</a></li>
+   <? endif; ?>
+     <? if (in_array("Wall Options",$_tabs_list)) : ?>
+  <li><a href="#wall-options" data-toggle="tab">Side Wall Options</a></li>
+   <? endif; ?>
+     <? if (in_array("Supplied With",$_tabs_list)) : ?>
+  <li><a href="#supplied-with" data-toggle="tab">Supplied With</a></li>
+  <? endif; ?>
+  
+   <? if (in_array("Fast Production",$_tabs_list)) : ?>
+  <li><a href="#fast-production" data-toggle="tab">Fast Production</a></li>
+  <? endif; ?>
+    <? if (in_array("FAQs",$_tabs_list)) : ?>
+  <li><a href="#faq" data-toggle="tab">FAQ's</a></li>
+  <? endif; ?>  
+  
+   <? if (in_array("Why Us",$_tabs_list)) : ?>
+  <li><a href="#why-us" data-toggle="tab">Why Us?</a></li>
+  <? endif; ?>
+  
+
+  
+ 
+  <? if (in_array("Testimonials",$_tabs_list)) : ?>
+  <li><a href="#testimonials" data-toggle="tab">Testimonials</a></li>
+  <? endif; ?>
+  <? if (in_array("FREE Visual!",$_tabs_list)) : ?>
+  <li class="flag-tab"><a href="#quote" data-toggle="tab">FREE Visual!</a></li>
+   <? endif; ?>
+    <? if (in_array("Quick Quote",$_tabs_list)) : ?>
+  <li><a href="#quick-quote" data-toggle="tab">Quick Quote</a></li>
+   <? endif; ?>
+ 
+ 
+   <? if (in_array("Questions Form",$_tabs_list)) : ?>
+  <li><a href="#questions" data-toggle="tab">Questions</a></li>
+  <? endif; ?>
+
+ 
+
+  
+   
+
+</ul>
+
+<!-- Tab panes -->
+
+<!-- Tab 1 -->
+<div class="tab-content">
+  <div class="tab-pane active" id="info">
+  
+  <div class="row">
+  <div class="col-md-7"><?php echo $_product->getDescription(); ?></div>
+	  <div class="col-md-5">		  
+		  <img class="img-responsive" src="<?php echo $_product->getMediaConfig()->getMediaUrl($_product->getData('image')) ?> " />
+		 </div>
+  </div><!-- Tab 1 End -->
+	  
+  </div><!--Tab End-->
+  
+  <div class="tab-pane" id="packages"><h2>Packages</h2><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('package_deals')->toHtml() ?> </div>
+  <div class="tab-pane" id="how-does-it-work"><h2>How does it work?</h2><?php echo $_product->getPoaHowDoesItWork(); ?></div>
+   <div class="tab-pane" id="frame-options"><h2>Frame Options</h2><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('frame_options')->toHtml() ?></div>
+    <div class="tab-pane" id="size-options"><h2>Size Options</h2><?php echo $_product->getPoaSizeOptions(); ?></div>
+  <div class="tab-pane" id="wall-options"><h2>Wall Options</h2><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('side_wall_options')->toHtml() ?></div>  
+  <div class="tab-pane" id="fast-production"><h2>Fast Production</h2><?php echo $_product->getFastProduction(); ?></div> 
+  <div class="tab-pane" id="product-options"><h2>Product Options</h2><?php echo $_product->getProductOptions(); ?></div> 
+  <div class="tab-pane" id="supplied-with"><h2>Supplied With</h2><?php echo $_product->getSuppliedWith(); ?></div> 
+  <div class="tab-pane" id="testimonials"><h2>Testimonials</h2><?php echo $_product->getTestimonials(); ?></div> 
+  <div class="tab-pane" id="why-us"><h2>Why Us</h2><?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter($this->helper('catalog/output')->productAttribute($_product, nl2br($_product->getData('why_us')), 'why_us')) ?></div> 
+  <div class="tab-pane" id="gallery"><h2>The <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> in action</h2><p>Click any images to view the <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> gallery.</p>
+  <hr> 
+   <?php foreach ($_product->getMediaGalleryImages() as $_image): ?>  
+  
+   <a title="<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" class="gallery" href="<?php echo $_image->getUrl()?>" rel="product-images" class="fancybox-button" title=""><img class="lazy" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(200,200); ?> " /></a> 
+     
+     <?php endforeach; ?>       
+       <script>  
+    $mt('.gallery').colorbox({
+        arrowKey: true,
+        //open: true, this auto opens the gallery on page load
+        opacity: 0.5,
+        iframe: false,
+        //innerWidth:1000,  
+        //innerHeight:600,
+        scrolling:false,
+        rel:"gallery"
+        }); 
+</script>  
+  </div><!--End gallery Tab-->
+  <div class="tab-pane" id="quote">
+  
+    <div class="col-md-6"><h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> FREE mock-up</h2><hr><p class="lead">Please outline your requirements in terms of size, color, quantity and design and we'll aim to get back to you within a few hours.</p><p> We offer a FREE mock up service to show you exactly how your branded <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> could look so upload your logos and we'll create a mock up as quickly as possible!</p>
+    
+    <img class="img-responsive lazy" src="<?php echo $_product->getMediaConfig()->getMediaUrl($_product->getData('image')) ?> " />
+    
+    </div>
+  
+    <div class="col-md-6">
+    
+    <h2>Your details...</h2><hr>
+  
+  <form role="form" id="poa-quote" name="poa-quote">
+    
+  <div class="form-group">
+   <div class="col-lg-12">
+    <label for="name" class="control-label">Your Full Name</label>
+   </div>
+    <div class="col-lg-12">
+      <input type="text" class="form-control" id="name" placeholder="Name" name="name"/>
+    </div>
+    </div>
+  
+ <div class="form-group">
+ <div class="col-lg-12">
+    <label for="Email" class="control-label">Your Email Address</label>
+ </div>
+ <div class="col-lg-12">
+         <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+ </div>
+    </div>
+  
+  
+    <div class="form-group"><div class="col-lg-12">
+    <label for="inputEmail3" class="control-label">Your Phone Number</label>
+    </div>
+    <div class="col-lg-12">
+      <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+    </div>
+    </div>
+ 
+  
+    <div class="form-group">
+    <div class="col-lg-12">
+    <label for="Company" class="control-label">Your Company Name</label>
+    </div>
+    <div class="col-lg-12">
+    
+      <input type="text" class="form-control" id="company" name="company" placeholder="Company">
+    </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-lg-12">
+    <label for="inputEmail3" class="control-label">How would you like our design team to layout your mock up?</label>
+    </div>
+    <div class="col-lg-12">
+      <textarea type="textarea" class="form-control" rows="4" id="comments" name="comments" placeholder="notes"></textarea>
+    </div>
+  </div>
+  
+  <?php if ($_product->getAttributeText('quote_form_product_interested') == "Yes") :?>
+  
+  <div class="form-group">
+      <div class="col-lg-12">
+    <label for="inputEmail3" class="control-label">Which Package are you interested in?</label>
+    </div>
+    <div class="col-lg-12">
+      <select name="package_interested" id="poa-product-interested" class="form-control">
+          <option value="">Please Select...</option>
+          <option value="A Custom Package">A Custom Package</option>
+          <option value="Basic Digital Package">Basic Digital Package</option>
+          <option value="Full Digital Package">Full Digital Package</option>
+          <option value="Sport Digital Package">Sport Digital Package</option>
+          <option value="Trader Digital Package">Trader Digital Package</option>
+          <option value="Expo Digital Package">Expo Digital Package</option>
+          <option value="Motorsport Package A">Motorsport Package A</option>
+          <option value="Motorsport Package B">Motorsport Package B</option>
+          <option value="Mega Expo Package">Mega Expo Package</option>
+           <option value="Super Expo Digital Package">Super Expo Digital Package</option>
+           <option value="Instant Event Package">Instant Event Package</option>
+          <option value="Instant Exhibition Package">Instant Exhibition Package</option>
+          <option value="Instant Trader Package">Instant Trader Package</option>
+         </select>    </div>
+  </div>
+  
+  
+ 
+  
+  
+  
+  
+  <div class="form-group">
+      <div class="col-lg-12">
+    <label for="inputEmail3" class="control-label">Which Size are you most interested in?</label>
+    </div>
+    <div class="col-lg-12">
+     <select name="product-size" id="poa-product-size" class="form-control">          
+          <option selected="selected">Please Select</option>
+          <option value="5' x 5'">5' x 5'</option>
+          <option value="7' x 7'">7' x 7'</option>
+          <option value="10' x 10'">10' x 10'</option>
+          <option value="10' x 15'">10' x 15'</option>
+          <option value="10' x 20'">10' x 20'</option>
+          <option value="13' x 13'">13' x 13'</option>
+          <option value="13' x 26'">13' x 26'</option>
+                  </select> </div>
+  </div>
+  
+  
+  <?php endif; ?>
+  
+  
+  <div class="form-group">
+      <div class="col-lg-12">
+    <label for="attachment1" class="control-label">For a custom mock up, please upload your logo (AI, Jpeg, PNG Gif and ZIP files accepted).</label>
+    </div>
+    <div class="col-lg-12">
+      <input type="file" name="attachment1"/>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+   <div class="form-group">
+     <div class="col-lg-12">
+  <label class="pointer" data-toggle="collapse" data-target="#more-attachments"><i class="fa fa-cloud-upload"></i> Want to upload more files? Click here</label>
+     </div>
+ 
+  <div id="more-attachments" class="col-lg-12 collapse">
+ <input type="file" name="attachment2"/>
+  <input type="file" name="attachment3"/>
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+    
+     <div class="form-group">
+     <div class="col-lg-12">
+   <label for="Email" class="control-label">When do you need the <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> by?</label>
+        </div>
+         <div class="col-lg-12">
+             <div class="input-group date">
+    <input type="text" class="form-control" id="date-required" name="date-required"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+    </div>
+
+     </div>
+     </div>
+     
+     
+     
+      <div class="form-group">
+      <div class="col-lg-12">
+    <label for="inputEmail3" class="control-label">How did you hear about us?</label>
+    </div>
+    <div class="col-lg-12">
+      <select name="referrer" id="poa-referrer" class="form-control">
+          <option selected="selected">Please Select...</option>
+          <option value="Word of mouth">Word of mouth</option>
+          <option value="I saw one at an event">I saw one at an event</option>
+          <option value="I received a brochure">I received a brochure</option>
+          <option value="Google Search">Google Search</option>
+          <option value="Bing Search">Bing Search</option>
+
+         </select>    </div>
+  </div>
+     
+     
+     
+     
+    
+     
+
+  
+   
+  
+
+  <div class="form-group">
+    <div class="col-lg-12">
+        <button type="submit" class="btn btn-primary form-submit">Submit your free mockup request</button>
+          
+    
+    </div>
+  </div>
+  <input type="hidden" name="poa_sub_check" id="poa_sub_check" value="1"/>
+  <input type="hidden" name="product_name" id="product_name" value="<?php echo $_product->getName() ?>"/>
+</form>
+
+
+
+<script type="text/javascript">
+$mt(document).ready(function() {
+    $mt('#poa-quote').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'fa fa-check-circle-o',
+			invalid: 'fafa-exclamation-triangle',
+			validating: 'fa fa-spinner'
+        },
+        
+                
+        submitHandler: function(validator, form, submitButton) {  
+        
+        //grab all form data  
+   var formData = new FormData($mt(form)[0]);
+                   
+            $mt.ajax({
+                type: "POST",
+                url: "/custom_db_processors/custom-functions-vs.php",
+                data: formData,
+               //data: form.serialize(),               
+                async: false,
+             cache: false,
+             contentType: false,
+             processData: false,
+                 success: function(data){
+			  //if(data.success == 'y') //Get the json respons from the script for success action
+                       // {   
+                            $mt('form#poa-quote').html("<h3>Thank You!</h3><p>A member of our sales team will be in contact with you shortly.</p>");
+							$mt("#form-submit").hide();
+                            $mt('form#poa-quote').focus();
+							
+							  // Track conversion
+                             window.google_trackConversion({
+                                 google_conversion_id: 974292941,
+                                 google_conversion_label: 'uHjhCObI11gQzY_K0AM',
+                                 google_conversion_language: "en",
+                                 google_conversion_format: "3",
+                                 google_conversion_color: "ffffff",
+                                 google_remarketing_only: false
+                             });
+                            /* Old tracking code
+                            var google_conversion_id = 974292941;
+
+                            var google_conversion_language = "en";
+
+                            var google_conversion_format = "3";
+
+                            var google_conversion_color = "ffffff";
+
+                            var google_conversion_label = "uHjhCObI11gQzY_K0AM";
+
+                            var google_remarketing_only = false;
+
+                            // save old document.write
+                            var oldDocumentWrite = document.write
+
+                            // change document.write temporary
+                            document.write = function(node){
+                                $mt("body").append(node)
+                            }
+
+                            // get script
+                            $mt.getScript( "http://www.googleadservices.com/pagead/conversion.js", function() {
+                                // replace the temp document.write with the original version
+                                setTimeout(function() {
+                                    document.write = oldDocumentWrite
+                                }, 100)
+                            });
+                            */
+							
+							
+							
+                        //}  
+                        //else  
+                        //{  
+                        //   $mt("#popupDialogError").popup("open");
+                        //}  
+        },
+			error: function (){    
+        }  
+
+            });
+        },
+        fields: {
+            // ... Field options ...
+             name: {
+                message: 'Please enter your name',
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your name'
+                    },
+                    //stringLength: {
+                     //   min: 6,
+                    //    max: 30,
+                    //    message: 'The username must be more than 6 and less than 30 characters long'
+                   // },
+                   // regexp: {
+                    //    regexp: /^[a-zA-Z0-9_]+$/,
+                    //    message: 'The username can only consist of alphabetical, number and underscore'
+                    //}
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'Please enter a valid email address'
+                    }
+                }
+                
+            },
+            
+            phone: {
+                message: 'Please enter your phone number',
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter your phone number'
+                    },
+                    //stringLength: {
+                     //   min: 6,
+                    //    max: 30,
+                    //    message: 'The username must be more than 6 and less than 30 characters long'
+                   // },
+                   // regexp: {
+                    //    regexp: /^[a-zA-Z0-9_]+$/,
+                    //    message: 'The username can only consist of alphabetical, number and underscore'
+                    //}
+                }
+            },
+            
+            
+                       
+            comments: {
+                message: 'Please briefly outline your requirements',
+                validators: {
+                    notEmpty: {
+                        message: 'Please briefly outline your requirements'
+                    },
+                    //stringLength: {
+                     //   min: 6,
+                    //    max: 30,
+                    //    message: 'The username must be more than 6 and less than 30 characters long'
+                   // },
+                   // regexp: {
+                    //    regexp: /^[a-zA-Z0-9_]+$/,
+                    //    message: 'The username can only consist of alphabetical, number and underscore'
+                    //}
+                }
+            },
+            
+            
+            package_interested: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please select a package'
+                    }
+                }
+            },
+            
+
+        }
+    });
+});
+</script>
+
+
+  </div>
+
+</div><!--quote form tab end-->
+
+  <div class="tab-pane" id="questions"><h2>Questions?</h2><?php echo $_product->getPoaSizeOptions(); ?></div>
+  <div class="tab-pane" id="faq"><h2>FAQ's</h2><?php echo $_product->getPoaFaq(); ?></div>
+  
+  <div class="tab-pane" id="quick-quote"><h2>Quick Quote</h2>
+  
+  
+  
+  <form class="form-horizontal quick-quote" role="form">
+		<p>Complete a few details below and a member of our team will get straight back to you with some quote options!</p>
+	<div class="form-group">
+	 <div class="col-lg-12">
+    <label for="attachment1" class="control-label">Your Name</label>
+    </div>
+
+    
+    <div class="col-sm-12">
+      <input type="text" name="name" class="form-control" id="inputPassword3" placeholder="Your Name">
+    </div>
+  </div>
+	
+  <div class="form-group">
+   <div class="col-lg-12">
+    <label for="attachment1" class="control-label">Your Email</label>
+    </div>
+    
+    <div class="col-sm-12">
+      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Your Email">
+    </div>
+  </div>
+  
+  <div class="form-group">
+   <div class="col-lg-12">
+    <label for="attachment1" class="control-label">Your Phone Number</label>
+    </div>
+    
+    <div class="col-sm-12">
+      <input type="text" name="phone" class="form-control" id="inputEmail3" placeholder="Your Phone Number">
+    </div>
+  </div>
+  
+ <div class="form-group">
+  <div class="col-lg-12">
+    <label for="attachment1" class="control-label">What are your main requirements?</label>
+    </div>
+     
+    <div class="col-lg-12">
+      <textarea type="textarea" class="form-control" rows="4" id="comments" name="comments" placeholder="notes"></textarea>
+    </div>
+  </div>
+
+  
+   <div class="form-group">
+    <div class="col-sm-12">
+      <button type="submit" disabled="disabled" class="btn btn-primary">Get Your Quote!</button>
+    </div>
+  </div>
+  <input type="hidden" name="quick_quote" value="1"/> 
+  <input type="hidden" name="product_name" id="product_name" value="<?php echo $_product->getName() ?>"/>
+  <input type="hidden" name="product-interested" id="product-interested" value="<?php echo $_product->getName() ?>"/>
+
+</form>
+
+  
+  
+  
+  
+  </div><!--End Quick Quote-->
+  
+</div><!--End-->
+
+        
+        
+        
+      
+        </div></div> 
+      
+  
+
+       
+            
+
+          </div></div> 
+
+            
+
+            
+
+          
+
+            <?php echo $this->getChildHtml('other');?>
+
+    
+     <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+		 <?php if($theme->getCfg('product_page/product_social')):?>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=115245961994281";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0];
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src="//platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }(document,"script","twitter-wjs");
+        <?php endif;?>
+    //]]>
+    </script>
+
+    
+    
+    
+   
+    <? //php
+    //if (isset($section['related']))
+    //{
+    //    echo $section['related'];
+    //}
+    //?>
+
+
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category     MT
+ * @package      MT_Newsletter
+ *
+ * @copyright    Copyright (C) 2008-2013 MagentoThemes.net. All Rights Reserved.
+ * @license      GNU General Public License version 2 or later;
+ * @author       MagentoThemes.net
+ * @email        support@magentothemes.net
+ *
+ */
+-->
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+            <action method="addCss" ifconfig="mtnewsletter/display_options/enable"><stylesheet>css/mt/newsletter/css/newsletter.css</stylesheet></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="newsletter/subscribe" name="mt.newsletter" template="mt/newsletter/subscribe.phtml"/>
+        </reference>
+    </default>
+</layout> 
